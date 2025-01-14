@@ -13,9 +13,7 @@ const RegisterPage = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Logika untuk menangani pendaftaran
     console.log('Form submitted with data:', { email, nim, nama, institusi, jurusan });
-    // Kamu bisa tambahkan logika pendaftaran sesuai kebutuhanmu
   };
 
   return (
