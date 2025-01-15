@@ -12,7 +12,7 @@ const Sidebar = () => {
   const menuItems = [
     { title: "Dashboard", icon: ChartColumnBig, route: "/dashboard" }, 
     { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
-    { title: "Peserta", icon: Users, route: "/peserta" },
+    { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
     { title: "Penugasan", icon: Briefcase, route: "/penugasan" },
     { title: "Arsip Surat", icon: Archive, route: "/arsip-surat" },
   ];
@@ -46,7 +46,8 @@ const Sidebar = () => {
           onClick={() => alert("Logout clicked")}
           className="flex items-center gap-4 w-full text-left p-3 ml-6 hover:text-blue-premier hover:font-bold text-gray-700 rounded-lg transition-colors"
         >
-          <LogOut className="w-5 h-5" />
+          <div className="w-5 h-5 mb-20"></div>
+          <LogOut className="" />
           <span>Logout</span>
         </button>
       </div>
