@@ -11,7 +11,7 @@ import {
 const Sidebar = () => {
   const menuItems = [
     { title: "Dashboard", icon: ChartColumnBig, route: "/dashboard" }, 
-    { title: "Pendaftar", icon: ClipboardList, route: "/pendaftar" },
+    { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
     { title: "Peserta", icon: Users, route: "/peserta" },
     { title: "Penugasan", icon: Briefcase, route: "/penugasan" },
     { title: "Arsip Surat", icon: Archive, route: "/arsip-surat" },

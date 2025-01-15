@@ -18,7 +18,7 @@ function Dashboard() {
         </div>
 
         {/* Stats Section */}
-        <div className="stats ml-8 mr-8 mt-20">
+        <div className="stats ml-8 mr-8 mt-28"> {/* Add margin-top to avoid overlapping with navbar */}
           <div className="grid grid-cols-4 gap-4">
             {/* Card for Jumlah Peserta */}
             <div className="text-blue-sky">
