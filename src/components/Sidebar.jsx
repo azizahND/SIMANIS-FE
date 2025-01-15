@@ -14,7 +14,7 @@ const Sidebar = () => {
     { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
     { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
     { title: "Penugasan", icon: Briefcase, route: "/form-tugas" },
-    { title: "Arsip Surat", icon: Archive, route: "/arsip-surat" },
+    { title: "Arsip Surat", icon: Archive, route: "/arsip-peserta-magang" },
   ];
 
   return (

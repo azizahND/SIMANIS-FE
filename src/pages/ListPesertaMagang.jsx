@@ -1,85 +1,79 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { FaInfoCircle, FaCheckCircle } from "react-icons/fa"; // Import icon for detail and approval
+import Button from "../components/Button"; // Import komponen Button
+import { FaInfoCircle } from "react-icons/fa";
 
 const ListPesertaMagang = () => {
   const daftarPesertaMagang = [
     { nama: "John Doe", institusi: "Universitas A", jurusan: "Teknik Informatika", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-01" },
     { nama: "Jane Doe", institusi: "Universitas B", jurusan: "Sistem Informasi", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-02-15" },
-    { nama: "Alex Smith", institusi: "Universitas C", jurusan: "Manajemen", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-10" },
-    { nama: "Sarah Johnson", institusi: "Universitas D", jurusan: "Ekonomi", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-01-20" },
-    { nama: "Mike Brown", institusi: "Universitas E", jurusan: "Psikologi", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-25" },
-    { nama: "Lucy White", institusi: "Universitas F", jurusan: "Ilmu Komunikasi", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-02-05" },
-    { nama: "Luke Black", institusi: "Universitas G", jurusan: "Desain Grafis", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-12" },
-    { nama: "Emma Green", institusi: "Universitas H", jurusan: "Hukum", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-02-10" },
-    { nama: "Olivia Harris", institusi: "Universitas I", jurusan: "Teknik Sipil", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-05" },
+    { nama: "Alex Smith", institusi: "Universitas C", jurusan: "Manajemen", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-25" },
+    { nama: "Sarah Johnson", institusi: "Universitas D", jurusan: "Ekonomi", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-03-10" },
+    { nama: "Mike Brown", institusi: "Universitas E", jurusan: "Psikologi", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-05" },
+    { nama: "Lucy White", institusi: "Universitas F", jurusan: "Ilmu Komunikasi", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-02-10" },
+    { nama: "Luke Black", institusi: "Universitas G", jurusan: "Desain Grafis", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-01-30" },
+    { nama: "Emma Green", institusi: "Universitas H", jurusan: "Hukum", status: "Aktif", keterangan: "Diproses", tglDaftar: "2024-03-01" },
+    { nama: "Olivia Harris", institusi: "Universitas I", jurusan: "Teknik Sipil", status: "Selesai", keterangan: "Diproses", tglDaftar: "2024-01-12" },
   ];
+  
 
-  const [searchTerm, setSearchTerm] = useState(""); // State for search
-  const [sortOrder, setSortOrder] = useState("newest"); // State for sorting
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("newest");
   const [sortedPesertaMagang, setSortedPesertaMagang] = useState(daftarPesertaMagang);
 
-  // Function to handle search
-  const filteredPesertaMagang = sortedPesertaMagang.filter((peserta) =>
-    peserta.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    peserta.institusi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    peserta.jurusan.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Function to handle sorting
-  const handleSortChange = (event) => {
-    const order = event.target.value;
-    setSortOrder(order);
-    const sortedData = [...filteredPesertaMagang].sort((a, b) => {
-      const dateA = new Date(a.tglDaftar);
-      const dateB = new Date(b.tglDaftar);
-      return order === "newest" ? dateB - dateA : dateA - dateB;
+  const handleSort = (order) => {
+    const sorted = [...sortedPesertaMagang].sort((a, b) => {
+      if (order === "newest") return new Date(b.tglDaftar) - new Date(a.tglDaftar);
+      if (order === "oldest") return new Date(a.tglDaftar) - new Date(b.tglDaftar);
+      return 0;
     });
-    setSortedPesertaMagang(sortedData);
+    setSortedPesertaMagang(sorted);
   };
 
-  // Function to handle approval
   const handleApproval = (index) => {
     const updatedPesertaMagang = [...sortedPesertaMagang];
-    updatedPesertaMagang[index].keterangan = "Diterbitkan"; // Change status to Diterbitkan after approval
+    updatedPesertaMagang[index].keterangan = "Diterbitkan";
     setSortedPesertaMagang(updatedPesertaMagang);
   };
 
+  React.useEffect(() => {
+    handleSort(sortOrder);
+  }, [sortOrder]);
+
+  const filteredPesertaMagang = sortedPesertaMagang.filter((peserta) =>
+    peserta.nama.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="flex">
-      {/* Sidebar */}
       <Sidebar />
-      
-      <div className="flex-1 ml-[250px]"> {/* Adjust right side to accommodate sidebar */}
-        {/* Navbar */}
+      <div className="flex-1 ml-[250px]">
         <Navbar />
-
-        {/* Page Content */}
         <div className="p-[100px]">
           <h1 className="text-blue-premier text-3xl font-bold">List Peserta Magang</h1>
-          <p className="text-sm text-gray-500">Semua Peserta Magang yang Sudah Disetujui</p>
+          <p className="text-sm text-gray-500">Semua Peserta Magang</p>
+          {/* Search Section */}
+          <div className="my-4 flex items-center justify-center space-x-4">
+            <input
+              type="text"
+              placeholder="Cari berdasarkan Nama, Email, atau Jurusan"
+              className="p-3 w-full max-w-lg border border-gray-300 rounded-md"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Cari Peserta..."
-            className="p-2 border border-gray-300 rounded-md w-full mb-4"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-
-          {/* Sorting Dropdown */}
-          <div className="mb-4">
+            {/* Sorting Dropdown on the Right */}
             <select
               value={sortOrder}
-              onChange={handleSortChange}
-              className="p-2 border border-gray-300 rounded-md"
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="p-3 border border-gray-300 rounded-md"
             >
               <option value="newest">Terbaru</option>
               <option value="oldest">Terlama</option>
             </select>
           </div>
+
 
           <table className="w-full border-collapse">
             <thead>
@@ -100,19 +94,18 @@ const ListPesertaMagang = () => {
                   <td className="p-2 border border-gray-300">{peserta.institusi}</td>
                   <td className="p-2 border border-gray-300">{peserta.jurusan}</td>
                   <td className="p-2 border border-gray-300">{peserta.status}</td>
-                  <td className="p-2 border border-gray-300">
-                    <FaInfoCircle className="text-blue-500 cursor-pointer" />
+                  <td className="p-2 border border-gray-300 text-center">
+                    <div className="flex justify-center items-center">
+                      <FaInfoCircle className="text-blue-500 cursor-pointer" />
+                    </div>
                   </td>
                   <td className="p-2 border border-gray-300">
                     {peserta.keterangan === "Diproses" ? (
-                      <button
-                        onClick={() => handleApproval(index)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                      >
-                        Setujui
-                      </button>
+                      <Button onClick={() => handleApproval(index)}>Setujui</Button>
                     ) : (
-                      <span className="text-green-500">Disetujui</span>
+                      <Button variant="success" disabled>
+                        Disetujui
+                      </Button>
                     )}
                   </td>
                   <td className="p-2 border border-gray-300">{peserta.keterangan}</td>
