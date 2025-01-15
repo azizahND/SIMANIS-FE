@@ -13,7 +13,7 @@ const Sidebar = () => {
     { title: "Dashboard", icon: ChartColumnBig, route: "/dashboard" }, 
     { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
     { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
-    { title: "Penugasan", icon: Briefcase, route: "/penugasan" },
+    { title: "Penugasan", icon: Briefcase, route: "/form-tugas" },
     { title: "Arsip Surat", icon: Archive, route: "/arsip-surat" },
   ];
 
