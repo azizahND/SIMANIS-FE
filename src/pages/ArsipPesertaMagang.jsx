@@ -65,25 +65,28 @@ const ArsipPesertaMagang = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-blue-premier text-white">
-                <th className="p-2 border border-gray-300">Nama Peserta</th>
-                <th className="p-2 border border-gray-300">Institusi</th>
-                <th className="p-2 border border-gray-300">Jurusan</th>
-                <th className="p-2 border border-gray-300">Tambah Surat</th>
-                <th className="p-2 border border-gray-300">Rekap Surat</th>
-                <th className="p-2 border border-gray-300">Status</th>
+                <th className="p-4 border border-gray-300">Nama Peserta</th>
+                <th className="p-4 border border-gray-300">Institusi</th>
+                <th className="p-4 border border-gray-300">Jurusan</th>
+                <th className="p-4 border border-gray-300">Tambah Surat</th>
+                <th className="p-4 border border-gray-300">Rekap Surat</th>
+                <th className="p-4 border border-gray-300">Status</th>
               </tr>
             </thead>
             <tbody>
               {arsipPesertaMagang.map((peserta, index) => (
-                <tr key={index} className="hover:bg-blue-100">
-                  <td className="p-2 border border-gray-300">{peserta.nama}</td>
-                  <td className="p-2 border border-gray-300">
+                <tr
+                  key={index}
+                  className="hover:bg-blue-100 transition-all ease-in-out"
+                >
+                  <td className="p-4 border border-gray-300">{peserta.nama}</td>
+                  <td className="p-4 border border-gray-300">
                     {peserta.institusi}
                   </td>
-                  <td className="p-2 border border-gray-300">
+                  <td className="p-4 border border-gray-300">
                     {peserta.jurusan}
                   </td>
-                  <td className="p-2 border border-gray-300 text-center">
+                  <td className="p-4 border border-gray-300 text-center">
                     <button
                       onClick={() => {
                         setSelectedPeserta(index);
@@ -94,7 +97,7 @@ const ArsipPesertaMagang = () => {
                       <FaUpload size={20} />
                     </button>
                   </td>
-                  <td className="p-2 border border-gray-300 text-center">
+                  <td className="p-4 border border-gray-300 text-center">
                     <button
                       onClick={() => {
                         setSelectedPeserta(index);
@@ -105,7 +108,7 @@ const ArsipPesertaMagang = () => {
                       <FaFileAlt size={20} />
                     </button>
                   </td>
-                  <td className="p-2 border border-gray-300">
+                  <td className="p-4 border border-gray-300">
                     {peserta.status}
                   </td>
                 </tr>
@@ -189,13 +192,13 @@ const ArsipPesertaMagang = () => {
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="bg-blue-premier text-white">
-                        <th className="p-3 text-left border border-gray-300">
+                        <th className="p-4 text-left border border-gray-300">
                           Nama Surat
                         </th>
-                        <th className="p-3 text-left border border-gray-300">
+                        <th className="p-4 text-left border border-gray-300">
                           File
                         </th>
-                        <th className="p-3 text-left border border-gray-300">
+                        <th className="p-4 text-left border border-gray-300">
                           Preview
                         </th>
                       </tr>
@@ -207,12 +210,12 @@ const ArsipPesertaMagang = () => {
                             key={index}
                             className={`${
                               index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                            } hover:bg-gray-200 transition`}
+                            } hover:bg-gray-200 transition-all`}
                           >
-                            <td className="p-3 border border-gray-300">
+                            <td className="p-4 border border-gray-300">
                               {surat.namaSurat}
                             </td>
-                            <td className="p-3 border border-gray-300">
+                            <td className="p-4 border border-gray-300">
                               <a
                                 href={`/${surat.file}`}
                                 download
@@ -221,7 +224,7 @@ const ArsipPesertaMagang = () => {
                                 {surat.file}
                               </a>
                             </td>
-                            <td className="p-3 border border-gray-300">
+                            <td className="p-4 border border-gray-300">
                               <embed
                                 src={`/${surat.file}`}
                                 type="application/pdf"

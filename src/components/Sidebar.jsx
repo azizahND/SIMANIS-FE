@@ -6,6 +6,7 @@ import {
   Briefcase,
   Archive,
   ChartColumnBig,
+  Settings,
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -15,6 +16,7 @@ const Sidebar = () => {
     { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
     { title: "Penugasan", icon: Briefcase, route: "/form-tugas" },
     { title: "Arsip Surat", icon: Archive, route: "/arsip-peserta-magang" },
+    { title: "Pengelolaan Admin", icon: Settings, route: "/admin-management" }, 
   ];
 
   return (
@@ -46,8 +48,7 @@ const Sidebar = () => {
           onClick={() => alert("Logout clicked")}
           className="flex items-center gap-4 w-full text-left p-3 ml-6 hover:text-blue-premier hover:font-bold text-gray-700 rounded-lg transition-colors"
         >
-          <div className="w-5 h-5 mb-20"></div>
-          <LogOut className="" />
+          <LogOut className="w-5 h-5" />
           <span>Logout</span>
         </button>
       </div>

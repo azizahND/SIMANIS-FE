@@ -71,25 +71,25 @@ const ListPendaftar = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-blue-premier text-white">
-                <th className="p-2 border border-gray-300">Email</th>
-                <th className="p-2 border border-gray-300">NIM</th>
-                <th className="p-2 border border-gray-300">Nama</th>
-                <th className="p-2 border border-gray-300">Institusi</th>
-                <th className="p-2 border border-gray-300">Jurusan</th>
-                <th className="p-2 border border-gray-300">Tanggal Pendaftaran</th>
-                <th className="p-2 border border-gray-300">Aksi</th>
+                <th className="p-3 border border-gray-300">Email</th>
+                <th className="p-3 border border-gray-300">NIM</th>
+                <th className="p-3 border border-gray-300">Nama</th>
+                <th className="p-3 border border-gray-300">Institusi</th>
+                <th className="p-3 border border-gray-300">Jurusan</th>
+                <th className="p-3 border border-gray-300">Tanggal Pendaftaran</th>
+                <th className="p-3 border border-gray-300">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {sortedPendaftar.map((pendaftar, index) => (
                 <tr key={index} className="hover:bg-blue-100">
-                  <td className="p-2 border border-gray-300">{pendaftar.email}</td>
-                  <td className="p-2 border border-gray-300">{pendaftar.nim}</td>
-                  <td className="p-2 border border-gray-300">{pendaftar.nama}</td>
-                  <td className="p-2 border border-gray-300">{pendaftar.institusi}</td>
-                  <td className="p-2 border border-gray-300">{pendaftar.jurusan}</td>
-                  <td className="p-2 border border-gray-300">{new Date(pendaftar.tglDaftar).toLocaleDateString()}</td>
-                  <td className="p-2 border border-gray-300">
+                  <td className="p-3 border border-gray-300">{pendaftar.email}</td>
+                  <td className="p-3 border border-gray-300">{pendaftar.nim}</td>
+                  <td className="p-3 border border-gray-300">{pendaftar.nama}</td>
+                  <td className="p-3 border border-gray-300">{pendaftar.institusi}</td>
+                  <td className="p-3 border border-gray-300">{pendaftar.jurusan}</td>
+                  <td className="p-3 border border-gray-300">{new Date(pendaftar.tglDaftar).toLocaleDateString()}</td>
+                  <td className="p-3 border border-gray-300">
                     <div className="flex justify-center space-x-4">
                       <button className="hover:text-green-500">
                         <FaCheckCircle className="text-green" />

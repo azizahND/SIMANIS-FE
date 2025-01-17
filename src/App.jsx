@@ -7,6 +7,7 @@ import ListPendaftar from "./pages/ListPendaftar";
 import ListPesertaMagang from "./pages/ListPesertaMagang";
 import FormTugas from "./pages/FormTugas"; // Import halaman Form Tugas
 import ArsipPesertaMagang from "./pages/ArsipPesertaMagang"; // Import halaman Arsip Peserta Magang
+import AdminManagement from "./pages/AdminManagement";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/list-peserta-magang" element={<ListPesertaMagang />} /> {/* List Peserta Magang route */}
         <Route path="/form-tugas" element={<FormTugas />} /> {/* Form Tugas route */}
         <Route path="/arsip-peserta-magang" element={<ArsipPesertaMagang />} /> {/* Arsip Peserta Magang route */}
+        <Route path="/admin-management" element={<AdminManagement />} /> {/* Admin Management route */}
       </Routes>
     </Router>
   );
