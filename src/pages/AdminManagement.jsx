@@ -8,11 +8,10 @@ const AdminManagement = () => {
   const [admins, setAdmins] = useState([
     { id: 1, name: "Admin 1", email: "admin1@example.com", role: "admin", password: "password1" },
     { id: 2, name: "Admin 2", email: "admin2@example.com", role: "superadmin", password: "password2" },
-  ]); // Dummy data admin
-  const [formData, setFormData] = useState({
+  ]);   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    role: "admin", // Default role
+    role: "admin", 
     password: "",
   });
 
