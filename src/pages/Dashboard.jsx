@@ -27,6 +27,8 @@ function Dashboard() {
                 ikon={Users}
                 jumlah="150"
                 keterangan="Orang"
+                to={"/list-peserta-magang"}
+            
               />
             </div>
 

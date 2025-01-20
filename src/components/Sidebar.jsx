@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import {
   LogOut,
   ClipboardList,
@@ -10,6 +11,8 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
+  const location = useLocation(); // Get the current location
+
   const menuItems = [
     { title: "Dashboard", icon: ChartColumnBig, route: "/dashboard" }, 
     { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
@@ -26,11 +29,17 @@ const Sidebar = () => {
           <ul className="space-y-2">
             {menuItems.map((item, index) => {
               const Icon = item.icon;
+              const isActive = location.pathname === item.route; // Check if the route is active
+
               return (
                 <li key={index}>
                   <a
                     href={item.route}
-                    className="flex items-center gap-4 p-3 text-gray-700 hover:bg-blue-premier hover:text-white rounded-lg transition-colors"
+                    className={`flex items-center gap-4 p-3 rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-blue-premier text-white"
+                        : "text-gray-700 hover:bg-blue-premier hover:text-white"
+                    }`}
                   >
                     <Icon className="w-5 h-5" />
                     <span>{item.title}</span>

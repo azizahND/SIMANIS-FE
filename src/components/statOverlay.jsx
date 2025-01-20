@@ -1,9 +1,17 @@
-import React from 'react';
+import useNavigateTo from "../hooks/useStat";
 
-const StatsWithOverlay = ({ label, jumlah, ikon: Ikon, keterangan }) => {
+
+const StatsWithOverlay = ({ label, jumlah, ikon: Ikon, keterangan, to }) => {
+  const navigateTo = useNavigateTo(); 
+
+  const handleNavigate = () => {
+    navigateTo(to); 
+  };
   return (
     <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:z-10">
-      <div className="flex items-center justify-between">
+      <div 
+      onClick={handleNavigate} 
+      className="flex items-center justify-between">
         <div>
           <div className="text-sm font-medium text-gray-500">{label}</div>
           <div className="flex items-baseline mt-2">
