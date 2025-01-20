@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import ButtonTutup from "../components/ButtonTutup"; // Import ButtonTutup
-import Button from "../components/Button"; // Import Button
-import { FaUpload, FaFileAlt } from "react-icons/fa";
+import Button from "../components/Button";
+import ButtonTutup from "../components/ButtonTutup"; // Import ButtonTutup component
+import { FaEye, FaTrash } from "react-icons/fa"; // Import icons
 
 const ArsipPesertaMagang = () => {
   const [arsipPesertaMagang, setArsipPesertaMagang] = useState([
@@ -12,13 +12,13 @@ const ArsipPesertaMagang = () => {
       institusi: "Universitas A",
       jurusan: "Teknik Informatika",
       surat: [],
-      status: "Tidak Ada",
+      status: "Tidak Tersedia",
     },
     {
       nama: "Jane Doe",
       institusi: "Universitas B",
       jurusan: "Sistem Informasi",
-      surat: [{ namaSurat: "Surat Pengantar", file: "pengantar.pdf" }],
+      surat: [],
       status: "Belum Lengkap",
     },
     {
@@ -33,22 +33,77 @@ const ArsipPesertaMagang = () => {
     },
   ]);
 
-  const [selectedPeserta, setSelectedPeserta] = useState(null);
-  const [showUploadPopup, setShowUploadPopup] = useState(false);
-  const [showRekapPopup, setShowRekapPopup] = useState(false);
+  const [selectedSurat, setSelectedSurat] = useState("Surat Pengantar");
+  const [selectedPeserta, setSelectedPeserta] = useState([]);
+  const [file, setFile] = useState(null);
+  const [viewDetailIndex, setViewDetailIndex] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleUploadSurat = (pesertaIndex, namaSurat, file) => {
+  const handleCheckboxChange = (index) => {
+    if (selectedPeserta.includes(index)) {
+      setSelectedPeserta(selectedPeserta.filter((i) => i !== index));
+    } else {
+      setSelectedPeserta([...selectedPeserta, index]);
+    }
+  };
+
+  const handleUpload = () => {
+    if (!file) {
+      alert("Harap pilih file untuk diupload.");
+      return;
+    }
+
     const updatedArsip = [...arsipPesertaMagang];
-    updatedArsip[pesertaIndex].surat.push({ namaSurat, file });
+    selectedPeserta.forEach((index) => {
+      const peserta = updatedArsip[index];
+      peserta.surat.push({ namaSurat: selectedSurat, file });
 
-    // Update status
-    updatedArsip[pesertaIndex].status =
-      updatedArsip[pesertaIndex].surat.length === 2
-        ? "Lengkap"
-        : "Belum Lengkap";
+      // Update status
+      const suratTypes = ["Surat Pengantar", "Surat Balasan"];
+      const uploadedTypes = peserta.surat.map((s) => s.namaSurat);
+      peserta.status =
+        suratTypes.every((type) => uploadedTypes.includes(type))
+          ? "Lengkap"
+          : "Belum Lengkap";
+    });
 
     setArsipPesertaMagang(updatedArsip);
-    setShowUploadPopup(false);
+    setSelectedPeserta([]);
+    setFile(null);
+    alert("File berhasil diupload!");
+  };
+
+  const handleDeleteSurat = (pesertaIndex, suratIndex) => {
+    const updatedArsip = [...arsipPesertaMagang];
+    updatedArsip[pesertaIndex].surat.splice(suratIndex, 1);
+
+    // Update status
+    const suratTypes = ["Surat Pengantar", "Surat Balasan"];
+    const uploadedTypes = updatedArsip[pesertaIndex].surat.map((s) => s.namaSurat);
+    updatedArsip[pesertaIndex].status =
+      suratTypes.every((type) => uploadedTypes.includes(type))
+        ? "Lengkap"
+        : updatedArsip[pesertaIndex].surat.length > 0
+        ? "Belum Lengkap"
+        : "Tidak Tersedia";
+
+    setArsipPesertaMagang(updatedArsip);
+  };
+
+  const handleDeletePeserta = (index) => {
+    const updatedArsip = arsipPesertaMagang.filter((_, i) => i !== index);
+    setArsipPesertaMagang(updatedArsip);
+    alert("Peserta berhasil dihapus.");
+  };
+
+  const openModal = (index) => {
+    setViewDetailIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setViewDetailIndex(null);
   };
 
   return (
@@ -62,15 +117,15 @@ const ArsipPesertaMagang = () => {
           </h1>
           <p className="text-sm text-gray-500">Arsip Surat Peserta Magang</p>
 
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse mt-6">
             <thead>
               <tr className="bg-blue-premier text-white">
+                <th className="p-4 border border-gray-300">Pilih</th>
                 <th className="p-4 border border-gray-300">Nama Peserta</th>
                 <th className="p-4 border border-gray-300">Institusi</th>
                 <th className="p-4 border border-gray-300">Jurusan</th>
-                <th className="p-4 border border-gray-300">Tambah Surat</th>
-                <th className="p-4 border border-gray-300">Rekap Surat</th>
                 <th className="p-4 border border-gray-300">Status</th>
+                <th className="p-4 border border-gray-300">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +134,13 @@ const ArsipPesertaMagang = () => {
                   key={index}
                   className="hover:bg-blue-100 transition-all ease-in-out"
                 >
+                  <td className="p-4 border border-gray-300 text-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedPeserta.includes(index)}
+                      onChange={() => handleCheckboxChange(index)}
+                    />
+                  </td>
                   <td className="p-4 border border-gray-300">{peserta.nama}</td>
                   <td className="p-4 border border-gray-300">
                     {peserta.institusi}
@@ -86,168 +148,114 @@ const ArsipPesertaMagang = () => {
                   <td className="p-4 border border-gray-300">
                     {peserta.jurusan}
                   </td>
-                  <td className="p-4 border border-gray-300 text-center">
-                    <button
-                      onClick={() => {
-                        setSelectedPeserta(index);
-                        setShowUploadPopup(true);
-                      }}
-                      className="text-blue-500"
-                    >
-                      <FaUpload size={20} />
-                    </button>
-                  </td>
-                  <td className="p-4 border border-gray-300 text-center">
-                    <button
-                      onClick={() => {
-                        setSelectedPeserta(index);
-                        setShowRekapPopup(true);
-                      }}
-                      className="text-blue-500"
-                    >
-                      <FaFileAlt size={20} />
-                    </button>
-                  </td>
                   <td className="p-4 border border-gray-300">
                     {peserta.status}
+                  </td>
+                  <td className="p-4 border border-gray-300 text-center">
+                    <button
+                      onClick={() => openModal(index)}
+                      className="bg-blue-premier text-white p-2 rounded"
+                    >
+                      <FaEye /> {/* Detail icon */}
+                    </button>
+                    <button
+                      onClick={() => handleDeletePeserta(index)}
+                      className="bg-red-500 text-white p-2 rounded ml-2"
+                    >
+                      <FaTrash /> {/* Trash icon */}
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-          {/* Upload Surat Popup */}
-          {showUploadPopup && (
-            <div className="popup fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-              <div className="bg-white p-5 rounded-lg">
-                <h2 className="text-xl font-bold">Upload Surat</h2>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const namaSurat = e.target.namaSurat.value;
-                    const file = e.target.file.files[0].name;
-                    handleUploadSurat(selectedPeserta, namaSurat, file);
-                  }}
+          {isModalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-md shadow-lg w-1/2 relative">
+      <h2 className="text-lg font-bold">
+        Detail Arsip: {arsipPesertaMagang[viewDetailIndex].nama}
+      </h2>
+      <table className="mt-4 w-full">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="p-2 border border-gray-300">Nama Surat</th>
+            <th className="p-2 border border-gray-300">File</th>
+            <th className="p-2 border border-gray-300">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {arsipPesertaMagang[viewDetailIndex].surat.map((surat, i) => (
+            <tr key={i}>
+              <td className="p-2 border border-gray-300">{surat.namaSurat}</td>
+              <td className="p-2 border border-gray-300">{surat.file}</td>
+              <td className="p-2 border border-gray-300 text-center">
+                <button
+                  onClick={() => handleDeleteSurat(viewDetailIndex, i)}
+                  className="bg-red-500 text-white px-3 py-1 rounded"
                 >
-                  <div>
-                    <label className="block font-semibold mb-2">
-                      Pilih Surat
-                    </label>
-                    <div className="flex items-center space-x-5">
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="namaSurat"
-                          value="Surat Pengantar"
-                          required
-                          className="mr-2"
-                        />
-                        Surat Pengantar
-                      </label>
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="namaSurat"
-                          value="Surat Balasan"
-                          required
-                          className="mr-2"
-                        />
-                        Surat Balasan
-                      </label>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <label className="block font-semibold mb-2">
-                      File Surat
-                    </label>
-                    <input
-                      type="file"
-                      name="file"
-                      required
-                      className="border border-gray-300 p-2 w-full"
-                    />
-                  </div>
-                  <div className="flex space-x-3 mt-5">
-                    <Button label={"Simpan"} />
-                    <ButtonTutup
-                      onClick={() => setShowUploadPopup(false)}
-                      className="bg-gray-300 text-black p-2 rounded"
-                    >
-                      Tutup
-                    </ButtonTutup>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
+                  <FaTrash /> {/* Trash icon */}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      
+      {/* Close button (X) */}
+      <button
+        onClick={closeModal}
+        className="absolute top-2 right-2 text-2xl font-bold text-gray-500 hover:text-gray-700"
+      >
+        &times;
+      </button>
+    </div>
+  </div>
+)}
 
-          {/* Rekap Surat Popup */}
-          {showRekapPopup && (
-            <div className="popup fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-              <div className="bg-white p-5 rounded-lg shadow-lg w-[90%] max-w-3xl">
-                <h2 className="text-xl font-bold mb-4 text-blue-premier">
-                  Rekap Surat
-                </h2>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-blue-premier text-white">
-                        <th className="p-4 text-left border border-gray-300">
-                          Nama Surat
-                        </th>
-                        <th className="p-4 text-left border border-gray-300">
-                          File
-                        </th>
-                        <th className="p-4 text-left border border-gray-300">
-                          Preview
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {arsipPesertaMagang[selectedPeserta].surat.map(
-                        (surat, index) => (
-                          <tr
-                            key={index}
-                            className={`${
-                              index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                            } hover:bg-gray-200 transition-all`}
-                          >
-                            <td className="p-4 border border-gray-300">
-                              {surat.namaSurat}
-                            </td>
-                            <td className="p-4 border border-gray-300">
-                              <a
-                                href={`/${surat.file}`}
-                                download
-                                className="text-blue-500 hover:underline"
-                              >
-                                {surat.file}
-                              </a>
-                            </td>
-                            <td className="p-4 border border-gray-300">
-                              <embed
-                                src={`/${surat.file}`}
-                                type="application/pdf"
-                                width="300"
-                                height="200"
-                                className="border border-gray-300 rounded-lg"
-                              />
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
+
+
+          <div className="mt-6">
+            <h2 className="text-lg font-bold">Upload Surat</h2>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <label className="font-semibold">Pilih Surat:</label>
+                <div className="flex items-center space-x-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="namaSurat"
+                      value="Surat Pengantar"
+                      checked={selectedSurat === "Surat Pengantar"}
+                      onChange={(e) => setSelectedSurat(e.target.value)}
+                      className="mr-2"
+                    />
+                    Surat Pengantar
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="namaSurat"
+                      value="Surat Balasan"
+                      checked={selectedSurat === "Surat Balasan"}
+                      onChange={(e) => setSelectedSurat(e.target.value)}
+                      className="mr-2"
+                    />
+                    Surat Balasan
+                  </label>
                 </div>
-                <ButtonTutup
-                  onClick={() => setShowRekapPopup(false)}
-                  className="mt-5"
-                >
-                  Tutup
-                </ButtonTutup>
               </div>
+
+              <div>
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+              </div>
+
+              <Button onClick={handleUpload}>Upload Surat</Button>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
