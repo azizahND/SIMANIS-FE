@@ -155,7 +155,7 @@ const ListPesertaMagang = () => {
             </thead>
             <tbody>
               {filteredPesertaMagang.map((peserta, index) => (
-                <tr key={index} className="hover:bg-blue-100">
+                <tr key={index} className="hover:bg-blue-50">
                   <td className="p-4 border border-gray-300">{peserta.nama}</td>
                   <td className="p-4 border border-gray-300">
                     {peserta.institusi}

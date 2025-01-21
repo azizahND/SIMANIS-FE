@@ -132,7 +132,7 @@ const ArsipPesertaMagang = () => {
               {arsipPesertaMagang.map((peserta, index) => (
                 <tr
                   key={index}
-                  className="hover:bg-blue-100 transition-all ease-in-out"
+                  className="hover:bg-blue-50 transition-all ease-in-out"
                 >
                   <td className="p-4 border border-gray-300 text-center">
                     <input

@@ -38,7 +38,7 @@ const Sidebar = () => {
                     className={`flex items-center gap-4 p-3 rounded-lg transition-colors ${
                       isActive
                         ? "bg-blue-premier text-white"
-                        : "text-gray-700 hover:bg-blue-premier hover:text-white"
+                        : "text-gray-700 hover:bg-blue-100 hover:text-gray-700"
                     }`}
                   >
                     <Icon className="w-5 h-5" />
