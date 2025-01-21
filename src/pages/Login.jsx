@@ -7,9 +7,11 @@ import Logo from "../components/Logo";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [groupCode, setGroupCode] = useState(''); // State baru untuk kode kelompok
 
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log({ email, password, groupCode }); // Menampilkan input untuk testing
   };
 
   return (
@@ -30,7 +32,7 @@ const Login = () => {
           />
         </div>
         
-        <div className="mb-8">
+        <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-white">Password</label>
           <Input
             type="password"
@@ -39,6 +41,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        <div className="mb-8">
+          <label className="block mb-2 text-sm font-medium text-white">Kode Kelompok</label>
+          <Input
+            type="text"
+            placeholder="Masukkan kode kelompok"
+            value={groupCode}
+            onChange={(e) => setGroupCode(e.target.value)}
+          />
+        </div>
+
         <div className="flex justify-center item-center">
           <Button label="Login"/>
         </div>

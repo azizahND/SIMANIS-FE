@@ -96,9 +96,22 @@ const ListPesertaMagang = () => {
     setSortedPesertaMagang(sorted);
   };
 
-  const handleApproval = (index) => {
+  const handleToggleApproval = (index) => {
     const updatedPesertaMagang = [...sortedPesertaMagang];
-    updatedPesertaMagang[index].keterangan = "Diterbitkan";
+    const peserta = updatedPesertaMagang[index];
+
+    if (peserta.keterangan === "Diproses") {
+      const confirm = window.confirm("Apakah Anda yakin ingin menyetujui?");
+      if (confirm) {
+        peserta.keterangan = "Diterbitkan";
+      }
+    } else {
+      const confirm = window.confirm("Apakah Anda yakin ingin membatalkan?");
+      if (confirm) {
+        peserta.keterangan = "Diproses";
+      }
+    }
+
     setSortedPesertaMagang(updatedPesertaMagang);
   };
 
@@ -130,7 +143,7 @@ const ListPesertaMagang = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            {/* Sorting Dropdown on the Right */}
+            {/* Sorting Dropdown */}
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
@@ -167,22 +180,20 @@ const ListPesertaMagang = () => {
                     {peserta.status}
                   </td>
                   <td className="p-4 border border-gray-300 text-center">
-                    <div className="flex justify-center items-center">
-                      <FaInfoCircle className="text-blue-500 cursor-pointer" />
-                    </div>
+                    <FaInfoCircle className="text-blue-500 cursor-pointer" />
                   </td>
-                  <td className="p-4 border border-gray-300 flex justify-center">
-                    {peserta.keterangan === "Diproses" ? (
-                      <Button onClick={() => handleApproval(index)}>
-                        Setujui
-                      </Button>
-                    ) : (
-                      <Button variant="success" disabled>
-                        Disetujui
-                      </Button>
-                    )}
+                  <td className="p-4 border border-gray-300 text-center">
+                    <Button
+                      onClick={() => handleToggleApproval(index)}
+                      variant={
+                        peserta.keterangan === "Diproses"
+                          ? "green"
+                          : "danger"
+                      }
+                    >
+                      {peserta.keterangan === "Diproses" ? "Setujui" : "Batal"}
+                    </Button>
                   </td>
-
                   <td className="p-4 border border-gray-300">
                     {peserta.keterangan}
                   </td>
