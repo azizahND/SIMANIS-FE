@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button"; // Import komponen Button
 import { FaInfoCircle } from "react-icons/fa";
+import Input from "../components/Input";
+import {Info} from "lucide-react"
 
 const ListPesertaMagang = () => {
   const daftarPesertaMagang = [
@@ -124,65 +126,70 @@ const ListPesertaMagang = () => {
   );
 
   return (
-    <div className="flex">
+    <div className="flex shadow max-w-[95rem] mx-auto">
       <Sidebar />
-      <div className="flex-1 ml-[250px]">
+      <div className="flex-1 ml-[250px] mx-auto h-screen">
         <Navbar />
-        <div className="p-[100px]">
-          <h1 className="text-blue-premier text-3xl font-bold">
-            List Peserta Magang
+        <div className="p-[100px] ">
+        <div className="shadow-lg p-6 bg-white rounded-md mt-10 ">
+          
+        <h1 className="text-blue-premier text-3xl font-bold ">
+            Daftar Peserta Magang
           </h1>
           <p className="text-sm text-gray-500">Semua Peserta Magang</p>
           {/* Search Section */}
           <div className="my-4 flex items-center justify-center space-x-4">
-            <input
+            <Input 
               type="text"
-              placeholder="Cari berdasarkan Nama, Email, atau Jurusan"
-              className="p-3 w-full max-w-lg border border-gray-300 rounded-md"
+              placeholder="Cari berdasarkan Nama atau Email"
+              className=" p-3 w-full max-w-lg border border-blue-premier rounded-lg"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
 
             {/* Sorting Dropdown */}
             <select
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-              className="p-3 border border-gray-300 rounded-md"
-            >
-              <option value="newest">Terbaru</option>
-              <option value="oldest">Terlama</option>
-            </select>
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="p-3 border bg-green border-gray-300 text-white font-medium rounded-md"
+              >
+                <option value="newest" className="text-black bg-white">Terbaru</option>
+                <option value="oldest" className="text-black bg-white">Terlama</option>
+             </select>
           </div>
 
-          <table className="w-full border-collapse">
+          <table className="w-full border-collapse  mt-10">
             <thead>
-              <tr className="bg-blue-premier text-white">
-                <th className="p-4 border border-gray-300">Nama Peserta</th>
-                <th className="p-4 border border-gray-300">Institusi</th>
-                <th className="p-4 border border-gray-300">Jurusan</th>
-                <th className="p-4 border border-gray-300">Status</th>
-                <th className="p-4 border border-gray-300">Detail</th>
-                <th className="p-4 border border-gray-300">Persetujuan</th>
-                <th className="p-4 border border-gray-300">Keterangan</th>
+              <tr className="bg-blue-premier text-white border-rounded-lg">
+                <th className="p-2 border border-gray-300">No</th>
+
+                <th className="p-2 border border-gray-300">Nama Peserta</th>
+                <th className="p-2 border border-gray-300">Institusi</th>
+                <th className="p-2 border border-gray-300">Jurusan</th>
+                <th className="p-2 border border-gray-300">Status</th>
+                <th className="p-2 border border-gray-300">Detail</th>
+                <th className="p-2 border border-gray-300">Persetujuan</th>
               </tr>
             </thead>
             <tbody>
               {filteredPesertaMagang.map((peserta, index) => (
-                <tr key={index} className="hover:bg-blue-50">
-                  <td className="p-4 border border-gray-300">{peserta.nama}</td>
-                  <td className="p-4 border border-gray-300">
+                <tr key={index} className="hover:bg-blue-50 text-center">
+                  <td className="border border-gray-300 p-2 text-sm">{index + 1}</td>
+
+                  <td className="p-2 border border-gray-300">{peserta.nama}</td>
+                  <td className="p-2 border border-gray-300">
                     {peserta.institusi}
                   </td>
-                  <td className="p-4 border border-gray-300">
+                  <td className="p-2 border border-gray-300">
                     {peserta.jurusan}
                   </td>
-                  <td className="p-4 border border-gray-300">
+                  <td className="p-2 border border-gray-300">
                     {peserta.status}
                   </td>
-                  <td className="p-4 border border-gray-300 text-center">
-                    <FaInfoCircle className="text-blue-500 cursor-pointer" />
+                  <td className="p-2 border border-gray-300 justify-center items-center">
+                    <Info className="text-blue-500 cursor-pointer " />
                   </td>
-                  <td className="p-4 border border-gray-300 text-center">
+                  <td className="p-2 border border-gray-300 text-center">
                     <Button
                       onClick={() => handleToggleApproval(index)}
                       variant={
@@ -194,14 +201,16 @@ const ListPesertaMagang = () => {
                       {peserta.keterangan === "Diproses" ? "Setujui" : "Batal"}
                     </Button>
                   </td>
-                  <td className="p-4 border border-gray-300">
-                    {peserta.keterangan}
-                  </td>
+                  
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        </div>
+
+
+        
       </div>
     </div>
   );

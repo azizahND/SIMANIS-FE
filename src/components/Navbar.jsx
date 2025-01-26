@@ -5,7 +5,7 @@ const Navbar = ({ user }) => {
   return (
     <div className="navbar">
       <header className="fixed top-0 left-0 w-full bg-blue-premier text-sm py-3 shadow z-50">
-        <nav className="max-w-[85rem] w-full mx-auto px-4 flex items-center justify-between">
+        <nav className="max-w-[95rem] w-full mx-auto px-4 flex items-center justify-between">
           {/* Brand Section */}
           <a
             className="flex items-center gap-x-2 text-xl font-semibold text-white focus:outline-none focus:opacity-80"

@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard"; 
-import ListPendaftar from "./pages/ListPendaftar";
+import ListPendaftar from "./pages/Kelompok";
 import ListPesertaMagang from "./pages/ListPesertaMagang";
 import FormTugas from "./pages/FormTugas"; // Import halaman Form Tugas
 import ArsipPesertaMagang from "./pages/ArsipPesertaMagang"; // Import halaman Arsip Peserta Magang
 import AdminManagement from "./pages/AdminManagement";
 import BiodataPage from "./pages/BiodataPage";
+import Landing from "./pages/LandingPage";
+import DaftarTugas from "./pages/DaftarTugas";
 
 const App = () => {
   return (
@@ -24,6 +26,10 @@ const App = () => {
         <Route path="/arsip-peserta-magang" element={<ArsipPesertaMagang />} /> {/* Arsip Peserta Magang route */}
         <Route path="/admin-management" element={<AdminManagement />} /> {/* Admin Management route */}
         <Route path="/biodata" element={<BiodataPage />} /> {/* Biodata route */}
+        <Route path="/landing" element={<Landing />} /> {/* Biodata route */}
+        <Route path="/daftarTugas" element={<DaftarTugas />} /> {/* Biodata route */}
+
+
       </Routes>
     </Router>
   );

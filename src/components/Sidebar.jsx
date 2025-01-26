@@ -15,15 +15,14 @@ const Sidebar = () => {
 
   const menuItems = [
     { title: "Dashboard", icon: ChartColumnBig, route: "/dashboard" }, 
-    { title: "Pendaftar", icon: ClipboardList, route: "/list-pendaftar" },
+    { title: "Kelompok", icon: ClipboardList, route: "/list-pendaftar" },
     { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
     { title: "Penugasan", icon: Briefcase, route: "/form-tugas" },
-    { title: "Arsip Surat", icon: Archive, route: "/arsip-peserta-magang" },
     { title: "Pengelolaan Admin", icon: Settings, route: "/admin-management" }, 
   ];
 
   return (
-    <div className="fixed top-20 left-0 h-screen bg-white shadow-lg w-72 flex flex-col">
+    <div className="fixed top-20 left-0 h-screen bg-white shadow-xl w-72 flex flex-col">
       <div className="h-full overflow-y-auto p-4 mt-5 flex-grow">
         <nav>
           <ul className="space-y-2">

@@ -7,19 +7,16 @@ import { User, Briefcase, Users, Settings } from "lucide-react";
 function Dashboard() {
   return (
     <div className="flex">
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content */}
-      <div className="ml-72 w-full"> {/* Add margin left to offset the sidebar */}
-        {/* Navbar */}
+      <div className="ml-72 w-full">
         <div className="navbar">
           <Navbar label="Selamat Datang" />
         </div>
 
-        {/* Stats Section */}
-        <div className="stats ml-8 mr-8 mt-28"> {/* Add margin-top to avoid overlapping with navbar */}
-          <div className="grid grid-cols-4 gap-4">
+       
+        <div className="max-w-[95rem] mx-auto p-20 mt-10"> 
+          <div className="grid grid-cols-4 gap-10">
             {/* Card for Jumlah Peserta */}
             <div className="text-blue-sky">
               <StatsWithOverlay

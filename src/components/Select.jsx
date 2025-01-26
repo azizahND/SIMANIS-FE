@@ -1,19 +1,29 @@
-
-const Select = ({ label, options, onChange, value, name, required = false }) => {
+const Select = ({
+  label,
+  options,
+  onChange,
+  value,
+  name,
+  required = false,
+  className = "",
+  width = "w-full",
+}) => {
   const handleChange = (e) => {
     onChange({
       target: {
         name: name,
-        value: e.target.value
-      }
+        value: e.target.value,
+      },
     });
   };
 
   return (
     <div className="mb-4">
-      <label className="block text-sm font-medium mb-2">{label}</label>
+      {label && (
+        <label className="block text-sm font-medium mb-2">{label}</label>
+      )}
       <select
-        className="py-3 px-4 block w-full border-2 border-gray-200 rounded-lg text-sm focus:border-blue-premier focus:ring-blue-premier disabled:opacity-50 disabled:pointer-events-none"
+        className={`py-3 px-4 block border-2 rounded-lg text-sm focus:ring-blue-premier disabled:opacity-50 disabled:pointer-events-none ${className} ${width}`}
         onChange={handleChange}
         value={value || ""}
         name={name}
