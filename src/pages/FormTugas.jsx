@@ -3,7 +3,8 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { Plus, Pencil, Trash2 } from 'lucide-react';
+import { Plus, Pencil, Trash2 } from "lucide-react";
+import DeletedAlert from "../components/DeletedAlert";
 
 // Komponen Modal
 const Modal = ({ children, isOpen, onClose }) => {
@@ -31,7 +32,8 @@ const FormTugas = () => {
   const [peserta, setPeserta] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false); // Modal visibility state
-  const [sortOrder, setSortOrder] = useState("newest");
+  const [isEdit, setIsEdit] = useState(false); // Flag for edit mode
+  const [editTugasIndex, setEditTugasIndex] = useState(null); // Index of task to edit
   const [rekapanTugas, setRekapanTugas] = useState([
     {
       judul: "Tugas Magang 1",
@@ -47,13 +49,7 @@ const FormTugas = () => {
     },
   ]);
 
-  const pesertaMagang = [
-    "John Doe",
-    "Jane Doe",
-    "Alex Smith",
-    "Sarah Johnson",
-    
-  ];
+  const pesertaMagang = ["John Doe", "Jane Doe", "Alex Smith", "Sarah Johnson", "Mark Lee", "Sophia Wang", "Olivia Brown", "Liam Smith", "Mia Johnson"];
 
   const filteredPeserta = pesertaMagang.filter((nama) =>
     nama.toLowerCase().includes(searchTerm.toLowerCase())
@@ -75,23 +71,48 @@ const FormTugas = () => {
       deadline,
       peserta,
     };
-    setRekapanTugas([...rekapanTugas, tugasBaru]);
+
+    if (isEdit) {
+      // Update existing task
+      const updatedTugas = [...rekapanTugas];
+      updatedTugas[editTugasIndex] = tugasBaru;
+      setRekapanTugas(updatedTugas);
+    } else {
+      // Add new task
+      setRekapanTugas([...rekapanTugas, tugasBaru]);
+    }
+
     setShowPopup(false);
     setJudulTugas("");
     setDeskripsiTugas("");
     setDeadline("");
     setPeserta([]);
+    setIsEdit(false); // Reset edit flag
+    setEditTugasIndex(null); // Reset edit task index
   };
 
-  const handleSort = (order) => {
-    const sorted = [...rekapanTugas].sort((a, b) => {
-      if (order === "newest")
-        return new Date(b.deadline) - new Date(a.deadline);
-      if (order === "oldest")
-        return new Date(a.deadline) - new Date(b.deadline);
-      return 0;
-    });
-    setRekapanTugas(sorted);
+  const handleEdit = (index) => {
+    const tugasToEdit = rekapanTugas[index];
+    setJudulTugas(tugasToEdit.judul);
+    setDeskripsiTugas(tugasToEdit.deskripsi);
+    setDeadline(tugasToEdit.deadline);
+    setPeserta(tugasToEdit.peserta);
+    setShowPopup(true);
+    setIsEdit(true); // Set edit mode to true
+    setEditTugasIndex(index); // Save the index of the task to be edited
+  };
+
+  const handleDeleteAdmin = (id) => {
+    DeletedAlert(
+      () => {
+        // Callback untuk konfirmasi
+        setRekapanTugas((prevTugas) => prevTugas.filter((tugas, index) => index !== id));
+      },
+      () => {
+        // Callback untuk pembatalan
+        console.log("Penghapusan dibatalkan");
+      }
+    );
   };
 
   return (
@@ -101,25 +122,23 @@ const FormTugas = () => {
         <Navbar />
         <main className="p-[100px]">
           <div className="shadow-lg p-6 bg-white rounded-md mt-10">
-            <h2 className="text-blue-premier text-3xl font-bold">Rekapan Tugas</h2>
+            <h2 className="text-blue-premier text-3xl font-bold">
+              Rekapan Tugas
+            </h2>
             <p className="text-sm text-gray-500">Semua Peserta Magang</p>
             {/* Search Section */}
             <div className="my-4 flex items-center justify-center space-x-4">
               <Input
                 type="text"
                 placeholder="Cari berdasarkan Nama, Email, atau Jurusan"
-                className=" p-3 w-full max-w-lg border border-blue-premier rounded-lg"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                px={20}
+                className="w-full text-center max-w-lg border border-blue-premier rounded-lg"
               />
 
               {/* Sorting Dropdown */}
               <select
-                value={sortOrder}
-                onChange={(e) => {
-                  setSortOrder(e.target.value);
-                  handleSort(e.target.value);
-                }}
                 className="p-3 border bg-green border-gray-300 text-white font-medium rounded-md"
               >
                 <option value="newest" className="text-black bg-white">
@@ -158,25 +177,31 @@ const FormTugas = () => {
                       index % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } hover:bg-blue-50`}
                   >
-                    <td className="border border-gray-300 p-2 text-sm">{index + 1}</td>
-                    <td className="border border-gray-300 p-2 text-sm">{tugas.judul}</td>
-                    <td className="border border-gray-300 p-2 text-sm">{tugas.deadline}</td>
+                    <td className="border border-gray-300 p-2 text-sm">
+                      {index + 1}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-sm">
+                      {tugas.judul}
+                    </td>
+                    <td className="border border-gray-300 p-2 text-sm">
+                      {tugas.deadline}
+                    </td>
                     <td className="border border-gray-300 p-2 text-sm">
                       {tugas.peserta.join(", ")}
                     </td>
                     <td className="border border-gray-300 p-2 flex items-center justify-center space-x-4">
-                     {/* <Button
-                     className="text-blue-500 hover:underline focus:outline-none"
-                     ikon={<Pencil/>}
-                     variant="yellow"
-                     /> */}
-                     <div className="p-2 rounded-lg bg-white shadow-lg">
-                        <Pencil className="text-yellow-600" />
-                     </div>
-                     <div className="p-2 rounded-lg bg-white shadow-lg">
-                        <Trash2 className="text-red-600"/>
-                     </div>
-                     
+                      <div className="p-2 rounded-lg bg-white shadow-lg">
+                        <Pencil
+                          className="text-yellow-600"
+                          onClick={() => handleEdit(index)} // Edit task on pencil click
+                        />
+                      </div>
+                      <div className="p-2 rounded-lg bg-white shadow-lg">
+                        <Trash2
+                          className="text-red-600"
+                          onClick={() => handleDeleteAdmin(index)} // Delete task
+                        />
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -184,12 +209,15 @@ const FormTugas = () => {
             </table>
           </div>
 
-          {/* Modal untuk Form */}
           <Modal isOpen={showPopup} onClose={() => setShowPopup(false)}>
             <form onSubmit={handleSubmit}>
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Form Tugas Magang</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                Form Tugas Magang
+              </h2>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Judul Tugas</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Judul Tugas
+                </label>
                 <Input
                   type="text"
                   placeholder="Masukkan judul tugas"
@@ -198,9 +226,11 @@ const FormTugas = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Deskripsi Tugas</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Deskripsi Tugas
+                </label>
                 <textarea
-                  className="w-full px-5 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md"
+                  className="w-full px-3 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md"
                   placeholder="Masukkan deskripsi tugas"
                   value={deskripsiTugas}
                   onChange={(e) => setDeskripsiTugas(e.target.value)}
@@ -208,7 +238,9 @@ const FormTugas = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Deadline Tugas</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Deadline Tugas
+                </label>
                 <Input
                   type="date"
                   value={deadline}
@@ -216,29 +248,34 @@ const FormTugas = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Peserta</label>
-                <Input
-                  placeholder="Cari peserta..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <div className="max-h-40 overflow-y-auto border border-gray-300 rounded-md p-2 mt-2">
-                  {filteredPeserta.map((nama, index) => (
-                    <div key={index} className="flex items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Peserta
+                </label>
+                <div className="space-y-2 max-h-60 border-2 rounded-lg px-3 border-gray-300 overflow-y-auto">
+                  {filteredPeserta.map((nama) => (
+                    <div key={nama} className="flex items-center  space-x-2">
                       <input
                         type="checkbox"
+                        id={nama}
                         checked={peserta.includes(nama)}
                         onChange={() => handleCheck(nama)}
-                        className="mr-2"
                       />
-                      <span>{nama}</span>
+                      <label htmlFor={nama} className="text-sm text-gray-700">
+                        {nama}
+                      </label>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-6 flex justify-center">
-                <Button type="submit" label="Simpan Tugas" variant="green" />
+              <div className="flex justify-center">
+              <Button
+                label={isEdit ? "Update Tugas" : "Tambah Tugas"}
+                variant="green"
+                type="submit"
+               
+              />
               </div>
+             
             </form>
           </Modal>
         </main>

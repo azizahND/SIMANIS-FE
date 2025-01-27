@@ -1,15 +1,35 @@
 import React from "react";
 
-const Input = ({ type = "text", placeholder, value, onChange, className,label }) => {
+const Input = ({ 
+  type = "text", 
+  placeholder = "", 
+  value, 
+  onChange, 
+  className = "", 
+  label = "", 
+  id = "input", 
+  px = 12, 
+  borderColor = "gray-300",   
+}) => {
   return (
-    <><div className=""></div><><label htmlFor="input-label" className="block text-sm font-bold mb-2 text-white">
-      {label}
-    </label><input
+    <div className={`max-w-sm ${className}`}>
+      {label && (
+        <label 
+          htmlFor={id} 
+          className="block text-sm font-medium mb-2 text-gray-700"
+        >
+          {label}
+        </label>
+      )}
+      <input
         type={type}
-        placeholder={placeholder}
+        id={id}
         value={value}
         onChange={onChange}
-        className={`w-full px-5 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 shadow-md ${className}`} /></></>
+        className={`py-3 px-2 block w-full border border-${borderColor} rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ${className}`}
+        placeholder={placeholder}
+      />
+    </div>
   );
 };
 

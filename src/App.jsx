@@ -11,6 +11,9 @@ import AdminManagement from "./pages/AdminManagement";
 import BiodataPage from "./pages/BiodataPage";
 import Landing from "./pages/LandingPage";
 import DaftarTugas from "./pages/DaftarTugas";
+import Sertifikat from "./pages/SertifikatPage";
+import SertifikatPeserta from "./pages/SertifikatPesertaPage";
+
 
 const App = () => {
   return (
@@ -28,6 +31,9 @@ const App = () => {
         <Route path="/biodata" element={<BiodataPage />} /> {/* Biodata route */}
         <Route path="/landing" element={<Landing />} /> {/* Biodata route */}
         <Route path="/daftarTugas" element={<DaftarTugas />} /> {/* Biodata route */}
+        <Route path="/sertifikat" element={<Sertifikat />} /> {/* Biodata route */}
+        <Route path="/sertifikatPeserta" element={<SertifikatPeserta />} /> {/* Biodata route */}
+
 
 
       </Routes>

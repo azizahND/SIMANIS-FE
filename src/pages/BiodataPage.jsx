@@ -50,167 +50,169 @@ const BiodataPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex shadow max-w-[95rem] mx-auto">
       <Sidebar />
-      <div className="flex-grow">
+      <div className="flex-1 ml-[250px] h-full w-full">
         <Navbar />
-        <div className="p-8 flex justify-center mt-8">
-          <div className="max-w-4xl w-full p-8 shadow-lg rounded-lg bg-white">
-            <h1 className="text-center text-blue-premier text-4xl mb-8">Formulir Biodata</h1>
-            <form className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
-              <label>Nama Lengkap</label>
+        <div className="p-[100px]">
+        <div className="shadow-lg p-6 bg-white rounded-md mt-10">
+            <h1 className="text-blue-premier text-3xl font-bold">Formulir Biodata</h1>
+            <p className="text-sm text-gray-500">Biodata</p>
+
+            <form className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-10">
               <Input
                 name="namaLengkap"
                 value={formData.namaLengkap}
                 onChange={handleChange}
                 placeholder="Masukkan nama lengkap"
+                label="Nama Lengkap"
               />
-              <label>Nama Panggilan</label>
               <Input
                 name="namaPanggilan"
                 value={formData.namaPanggilan}
                 onChange={handleChange}
                 placeholder="Masukkan nama panggilan"
+                label="Nama Panggilan"
               />
-              <label>Tempat/Tanggal Lahir</label>
               <Input
                 name="tempatTanggalLahir"
                 value={formData.tempatTanggalLahir}
                 onChange={handleChange}
                 placeholder="Contoh: Padang, 29 Februari 2004"
+                label="Tempat, Tanggal Lahir"
               />
-              <label>Anak ke/dari bersaudara</label>
               <Input
                 name="anakKe"
                 value={formData.anakKe}
                 onChange={handleChange}
                 placeholder="Contoh: 2 dari 3 bersaudara"
+                label="Anak-Ke"
               />
-              <label>Asal Sekolah/Universitas</label>
               <Input
                 name="asalSekolah"
                 value={formData.asalSekolah}
                 onChange={handleChange}
                 placeholder="Masukkan asal sekolah/universitas"
+                label="Institusi"
               />
-              <label>Jurusan</label>
               <Input
                 name="jurusan"
                 value={formData.jurusan}
                 onChange={handleChange}
                 placeholder="Masukkan jurusan"
+                label="Jurusan"
               />
-              <label>IPK (bagi mahasiswa/i)</label>
               <Input
                 name="ipk"
                 value={formData.ipk}
                 onChange={handleChange}
                 placeholder="Contoh: 3.85"
+                label="Indeks Prestasi"
               />
-              <label>Nama Ibu</label>
               <Input
                 name="namaIbu"
                 value={formData.namaIbu}
                 onChange={handleChange}
                 placeholder="Masukkan nama ibu"
+                label="Nama Ibu"
               />
-              <label>Pekerjaan Ibu</label>
               <Input
                 name="pekerjaanIbu"
                 value={formData.pekerjaanIbu}
                 onChange={handleChange}
                 placeholder="Masukkan pekerjaan ibu"
+                label="Pekerjaan Ibu"
               />
-              <label>Nama Ayah</label>
               <Input
                 name="namaAyah"
                 value={formData.namaAyah}
                 onChange={handleChange}
                 placeholder="Masukkan nama ayah"
+                label="Nama Ayah"
               />
-              <label>Pekerjaan Ayah</label>
               <Input
                 name="pekerjaanAyah"
                 value={formData.pekerjaanAyah}
                 onChange={handleChange}
                 placeholder="Masukkan pekerjaan ayah"
+                label="Pekerjaan Ayah"
               />
-              <label>Agama</label>
               <Input
                 name="agama"
                 value={formData.agama}
                 onChange={handleChange}
                 placeholder="Masukkan agama"
+                label="Agama"
               />
-              <label>Nomor HP</label>
               <Input
                 name="nomorHp"
                 value={formData.nomorHp}
                 onChange={handleChange}
                 placeholder="Masukkan nomor HP"
+                label="Nomor Handphone"
               />
-              <label>Alamat Rumah</label>
               <Input
                 name="alamatRumah"
                 value={formData.alamatRumah}
                 onChange={handleChange}
                 placeholder="Masukkan alamat rumah"
+                label="Alamat Rumah"
               />
-              <label>Alamat Sekolah/Universitas</label>
               <Input
                 name="alamatSekolah"
                 value={formData.alamatSekolah}
                 onChange={handleChange}
                 placeholder="Masukkan alamat sekolah/universitas"
+                label="Alamat Domisili"
               />
-              <label>Riwayat Pendidikan SD</label>
               <Input
                 name="riwayatPendidikanSD"
                 value={formData.riwayatPendidikanSD}
                 onChange={handleChange}
                 placeholder="Masukkan riwayat pendidikan SD"
+                label="Pendidikan SD"
               />
-              <label>Tahun Lulus SD</label>
               <Input
                 name="tahunLulusSD"
                 value={formData.tahunLulusSD}
                 onChange={handleChange}
                 placeholder="Masukkan tahun lulus SD"
+                label="Tahun Tamat"
               />
-              <label>Tempat SD</label>
               <Input
                 name="tempatSD"
                 value={formData.tempatSD}
                 onChange={handleChange}
                 placeholder="Masukkan tempat SD"
+                label="xxx"
               />
-              <label>Alasan Magang</label>
               <Input
                 name="alasanMagang"
                 value={formData.alasanMagang}
                 onChange={handleChange}
                 placeholder="Masukkan alasan magang"
+                label="Alasan Magang"
               />
-              <label>Jadwal Magang</label>
               <Input
                 name="jadwalMagang"
                 value={formData.jadwalMagang}
                 onChange={handleChange}
                 placeholder="Masukkan jadwal magang"
+                label="Jadwal Magang"
               />
-              <label>Keterampilan</label>
               <Input
                 name="keterampilan"
                 value={formData.keterampilan}
                 onChange={handleChange}
                 placeholder="Masukkan keterampilan"
+                label="Keterampilan"
               />
-              <label>Unit Magang</label>
               <Input
                 name="unitMagang"
                 value={formData.unitMagang}
                 onChange={handleChange}
                 placeholder="Masukkan unit magang"
+                label="Unit Magang"
               />
               <div className="col-span-2 mt-6">
                 <label className="flex items-center">
@@ -224,7 +226,7 @@ const BiodataPage = () => {
                 </label>
               </div>
 
-              <div className="col-span-2 text-center mt-6">
+              <div className="col-span-2 text-center mt-6 flex justify-center">
                 <Button onClick={handleSubmit} type="button" disabled={!isDataCorrect}>
                   Simpan
                 </Button>

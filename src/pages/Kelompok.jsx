@@ -44,9 +44,10 @@ const Kelompok = () => {
               <Input
                 type="text"
                 placeholder="Cari berdasarkan Kelompok"
-                className="p-3 w-full max-w-lg border border-blue-premier rounded-lg"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                px={20}
+                className="w-full text-center max-w-lg border border-blue-premier rounded-lg"
               />
               <select
                 value={sortOrder}

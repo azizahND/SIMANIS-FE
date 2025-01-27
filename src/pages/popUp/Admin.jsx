@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../components/Button";
 import ButtonTutup from "../../components/ButtonTutup";
+import Input from "../../components/Input";
 
 const Popup = ({ isVisible, onClose, onSubmit, formData, onInputChange }) => {
   if (!isVisible) return null; // Jangan render apa pun jika popup tidak terlihat

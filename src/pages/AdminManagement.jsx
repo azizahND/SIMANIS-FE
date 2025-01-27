@@ -120,23 +120,24 @@ const AdminManagement = () => {
                     <td className="border border-gray-300 p-2">{admin.email}</td>
                     <td className="border border-gray-300 p-2">{admin.role}</td>
                     <td className="border border-gray-300 p-2 flex items-center justify-center space-x-4">
-                      <Button
+                      <div className="p-2 rounded-lg bg-white shadow-lg">
+                      <Pencil
                         onClick={() => handleEditAdmin(admin)}
-                        className="text-blue-500 hover:underline focus:outline-none"
-                        ikon={<Pencil/>}
-                        variant="yellow"
+                        className="text-yellow-600 hover:underline focus:outline-none"
 
-                      >
-                        
-                      </Button>
-                      <Button
+                      />
+                      </div>
+                      <div className="p-2 rounded-lg bg-white shadow-lg">
+                      <Trash2
                         onClick={() => handleDeleteAdmin(admin.id)}
                         className="text-red-500 hover:underline focus:outline-none"
-                        ikon={<Trash2/>}
-                        variant="danger"
 
-                      >
-                      </Button>
+                      />
+                      </div>
+                        
+                      
+                      
+                      
                     </td>
 
                   </tr>
