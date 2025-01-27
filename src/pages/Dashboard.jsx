@@ -16,7 +16,7 @@ function Dashboard() {
 
        
         <div className="max-w-[95rem] mx-auto p-20 mt-10"> 
-          <div className="grid grid-cols-4 gap-10">
+          <div className="grid grid-cols-4 gap-2">
             {/* Card for Jumlah Peserta */}
             <div className="text-blue-sky">
               <StatsWithOverlay

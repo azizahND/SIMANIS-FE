@@ -8,6 +8,7 @@ import {
   Archive,
   ChartColumnBig,
   Settings,
+  ShieldCheck
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -18,7 +19,10 @@ const Sidebar = () => {
     { title: "Kelompok", icon: ClipboardList, route: "/list-pendaftar" },
     { title: "Peserta", icon: Users, route: "/list-peserta-magang" },
     { title: "Penugasan", icon: Briefcase, route: "/form-tugas" },
-    { title: "Pengelolaan Admin", icon: Settings, route: "/admin-management" }, 
+    { title: "Sertifikat", icon: ShieldCheck, route: "/sertfikat" }, 
+
+    { title: "Pengelolaan Akun", icon: Settings, route: "/admin-management" }, 
+
   ];
 
   return (

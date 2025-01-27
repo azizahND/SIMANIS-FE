@@ -3,7 +3,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { Plus } from 'lucide-react';
+import { Plus, Pencil, Trash2 } from 'lucide-react';
 
 // Komponen Modal
 const Modal = ({ children, isOpen, onClose }) => {
@@ -52,11 +52,7 @@ const FormTugas = () => {
     "Jane Doe",
     "Alex Smith",
     "Sarah Johnson",
-    "Mike Brown",
-    "Lucy White",
-    "Luke Black",
-    "Emma Green",
-    "Olivia Harris",
+    
   ];
 
   const filteredPeserta = pesertaMagang.filter((nama) =>
@@ -148,7 +144,7 @@ const FormTugas = () => {
               <thead>
                 <tr className="bg-blue-premier text-white border-lg">
                   <th className="p-2 border border-gray-300">No</th>
-                  <th className="p-2 border border-gray-300">Judul</th>
+                  <th className="p-2 border border-gray-300">Tugas</th>
                   <th className="p-2 border border-gray-300">Deadline</th>
                   <th className="p-2 border border-gray-300">Peserta</th>
                   <th className="p-2 border border-gray-300">Aksi</th>
@@ -160,7 +156,7 @@ const FormTugas = () => {
                     key={index}
                     className={`${
                       index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    } hover:bg-blue-100`}
+                    } hover:bg-blue-50`}
                   >
                     <td className="border border-gray-300 p-2 text-sm">{index + 1}</td>
                     <td className="border border-gray-300 p-2 text-sm">{tugas.judul}</td>
@@ -168,10 +164,19 @@ const FormTugas = () => {
                     <td className="border border-gray-300 p-2 text-sm">
                       {tugas.peserta.join(", ")}
                     </td>
-                    <td className="border border-gray-300 p-2 text-sm">
-                      <button className="text-blue-500 hover:text-blue-700 font-medium">
-                        Detail
-                      </button>
+                    <td className="border border-gray-300 p-2 flex items-center justify-center space-x-4">
+                     {/* <Button
+                     className="text-blue-500 hover:underline focus:outline-none"
+                     ikon={<Pencil/>}
+                     variant="yellow"
+                     /> */}
+                     <div className="p-2 rounded-lg bg-white shadow-lg">
+                        <Pencil className="text-yellow-600" />
+                     </div>
+                     <div className="p-2 rounded-lg bg-white shadow-lg">
+                        <Trash2 className="text-red-600"/>
+                     </div>
+                     
                     </td>
                   </tr>
                 ))}

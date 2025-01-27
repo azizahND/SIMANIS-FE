@@ -5,6 +5,7 @@ import Button from "../components/Button"; // Import komponen Button
 import { FaInfoCircle } from "react-icons/fa";
 import Input from "../components/Input";
 import {Info} from "lucide-react"
+import Select from "../components/Select";
 
 const ListPesertaMagang = () => {
   const daftarPesertaMagang = [
@@ -40,46 +41,8 @@ const ListPesertaMagang = () => {
       keterangan: "Diproses",
       tglDaftar: "2024-03-10",
     },
-    {
-      nama: "Mike Brown",
-      institusi: "Universitas E",
-      jurusan: "Psikologi",
-      status: "Aktif",
-      keterangan: "Diproses",
-      tglDaftar: "2024-01-05",
-    },
-    {
-      nama: "Lucy White",
-      institusi: "Universitas F",
-      jurusan: "Ilmu Komunikasi",
-      status: "Aktif",
-      keterangan: "Diproses",
-      tglDaftar: "2024-02-10",
-    },
-    {
-      nama: "Luke Black",
-      institusi: "Universitas G",
-      jurusan: "Desain Grafis",
-      status: "Aktif",
-      keterangan: "Diproses",
-      tglDaftar: "2024-01-30",
-    },
-    {
-      nama: "Emma Green",
-      institusi: "Universitas H",
-      jurusan: "Hukum",
-      status: "Aktif",
-      keterangan: "Diproses",
-      tglDaftar: "2024-03-01",
-    },
-    {
-      nama: "Olivia Harris",
-      institusi: "Universitas I",
-      jurusan: "Teknik Sipil",
-      status: "Selesai",
-      keterangan: "Diproses",
-      tglDaftar: "2024-01-12",
-    },
+   
+   
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -125,10 +88,17 @@ const ListPesertaMagang = () => {
     peserta.nama.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+   const [status, setStatus] = useState("pending");
+  
+    const statusOptions = [
+      { value: "pending", label: "Pending" },
+      { value: "selesai", label: "Selesai" },
+    ];
+
   return (
     <div className="flex shadow max-w-[95rem] mx-auto">
       <Sidebar />
-      <div className="flex-1 ml-[250px] mx-auto h-screen">
+      <div className="flex-1 ml-[250px] mx-auto  h-screen">
         <Navbar />
         <div className="p-[100px] ">
         <div className="shadow-lg p-6 bg-white rounded-md mt-10 ">
@@ -158,7 +128,7 @@ const ListPesertaMagang = () => {
              </select>
           </div>
 
-          <table className="w-full border-collapse  mt-10">
+          <table className="w-full border-collapse text-center mt-10">
             <thead>
               <tr className="bg-blue-premier text-white border-rounded-lg">
                 <th className="p-2 border border-gray-300">No</th>
@@ -186,20 +156,21 @@ const ListPesertaMagang = () => {
                   <td className="p-2 border border-gray-300">
                     {peserta.status}
                   </td>
-                  <td className="p-2 border border-gray-300 justify-center items-center">
-                    <Info className="text-blue-500 cursor-pointer " />
+                  <td className="p-2 border border-gray-300 flex justify-center items-center">
+                    <Info className="text-blue-500 cursor-pointer" />
                   </td>
-                  <td className="p-2 border border-gray-300 text-center">
-                    <Button
-                      onClick={() => handleToggleApproval(index)}
-                      variant={
-                        peserta.keterangan === "Diproses"
-                          ? "green"
-                          : "danger"
-                      }
-                    >
-                      {peserta.keterangan === "Diproses" ? "Setujui" : "Batal"}
-                    </Button>
+
+                  <td className="p-1 border border-gray-300 text-center">
+                  <div className="flex justify-center items-center ">
+                        <Select
+                            options={statusOptions}
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            name="status"
+                            className="mt-3"
+                            width="w-25"
+                        />
+                        </div>
                   </td>
                   
                 </tr>

@@ -3,12 +3,13 @@ import { Plus } from 'lucide-react'; // Impor ikon Plus dari lucide-react
 
 const Button = ({ label, children, onClick, type = "button", className, variant = "green", ikon }) => {
   const variantClasses = {
-    green: "bg-green border-2 border-green hover:bg-white hover:text-green hover:border-green",
+    green: "bg-green border-2 border-green hover:bg-white hover:text-green hover:border-white",
     primary: "bg-blue-500 hover:bg-blue-600",
-    danger: "bg-red-500 hover:bg-red-600",
+    danger: "bg-red-500 hover:bg-white border-2 hover:border-red-500 hover:text-red-500",
     oren: "bg-oren hover:bg-white border-2 border-oren hover:text-oren hover:border-oren",
     white: "bg-white text-blue-800 hover:font-bold",
-    blue: "bg-blue-sky hover:bg-white hover:border-blue-sky border-2 hover:text-blue-sky font-medium"
+    blue: "bg-blue-sky hover:bg-white hover:border-blue-sky border-2 hover:text-blue-sky font-medium",
+    yellow:"bg-yellow-500 hover:bg-white border-2 hover:border-yellow-500 hover:text-yellow-500"
   };
 
   return (

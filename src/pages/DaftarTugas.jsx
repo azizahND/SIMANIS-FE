@@ -41,8 +41,14 @@ const DaftarTugas = () => {
     peserta.pemilik.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const statusOptions = ["Pending", "Selesai", "terlambat"]; // Tambahkan opsi status di sini
+  
+  const [status, setStatus] = useState("pending");
 
+  const statusOptions = [
+    { value: "pending", label: "Pending" },
+    { value: "selesai", label: "Selesai" },
+    { value: "terlambat", label: "Terlambat" },
+  ];
   return (
     <div className="flex shadow max-w-[95rem] mx-auto">
       <Sidebar />
@@ -85,13 +91,13 @@ const DaftarTugas = () => {
                     <td className=" border border-gray-300 align-middle">
                         <div className="flex justify-center items-center ">
                         <Select
-                        options={statusOptions} 
-                        value={peserta.status}
-                        onChange={(e) => console.log(`Status changed to: ${e.target.value}`)} // Ganti dengan handler sesuai kebutuhan
-                        name={`status-${index}`}
-                        className="bg-teal-100 font-bold text-teal-700 border-teal-500 mt-3"
-                        width="w-25"
-                      />
+                            options={statusOptions}
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            name="status"
+                            className="mt-3"
+                            width="w-25"
+                        />
                         </div>
                      
                     </td>

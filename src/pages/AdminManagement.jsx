@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
-import ButtonTutup from "../components/ButtonTutup";
 import Popup from "./popUp/Admin";
+import { Plus, Trash2, Pencil } from 'lucide-react';
+import DeletedAlert from "../components/DeletedAlert";
+
 
 const AdminManagement = () => {
   const [admins, setAdmins] = useState([
@@ -59,10 +61,18 @@ const AdminManagement = () => {
   };
 
   const handleDeleteAdmin = (id) => {
-    if (window.confirm("Are you sure you want to delete this admin?")) {
-      setAdmins(admins.filter((admin) => admin.id !== id));
-    }
+    DeletedAlert(
+      () => {
+        // Callback untuk konfirmasi
+        setAdmins((prevAdmins) => prevAdmins.filter((admin) => admin.id !== id));
+      },
+      () => {
+        // Callback untuk pembatalan
+        console.log("Penghapusan dibatalkan");
+      }
+    );
   };
+  
 
   return (
     <div className="flex shadow max-w-[95rem] mx-auto">
@@ -86,41 +96,49 @@ const AdminManagement = () => {
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-blue-premier text-3xl font-bold">Daftar Admin</h1>
               <Button
-                onClick={() => setIsPopupVisible(true)}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
-              >
-                Tambah Admin
-              </Button>
+                label={"Admin"}
+                variant="blue"
+                ikon={<Plus />}
+                onClick={() => setIsPopupVisible(true)} // Menampilkan modal saat tombol ditekan
+              />
+            
+             
             </div>
             <table className="w-full table-auto border-collapse border border-gray-300">
               <thead>
                 <tr className="bg-blue-premier text-white">
-                  <th className="border border-gray-300 p-3 text-center">Nama</th>
-                  <th className="border border-gray-300 p-3 text-center">Email</th>
-                  <th className="border border-gray-300 p-3 text-center">Role</th>
-                  <th className="border border-gray-300 p-3 text-center">Aksi</th>
+                  <th className="border border-gray-300 p-2 text-center">Nama</th>
+                  <th className="border border-gray-300 p-2 text-center">Email</th>
+                  <th className="border border-gray-300 p-2 text-center">Role</th>
+                  <th className="border border-gray-300 p-2 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {admins.map((admin) => (
-                  <tr key={admin.id} className="text-center hover:bg-gray-50">
-                    <td className="border border-gray-300 p-3">{admin.name}</td>
-                    <td className="border border-gray-300 p-3">{admin.email}</td>
-                    <td className="border border-gray-300 p-3">{admin.role}</td>
-                    <td className="border border-gray-300 p-3">
+                  <tr key={admin.id} className="text-center hover:bg-blue-50">
+                    <td className="border border-gray-300 p-2">{admin.name}</td>
+                    <td className="border border-gray-300 p-2">{admin.email}</td>
+                    <td className="border border-gray-300 p-2">{admin.role}</td>
+                    <td className="border border-gray-300 p-2 flex items-center justify-center space-x-4">
                       <Button
                         onClick={() => handleEditAdmin(admin)}
-                        className="text-blue-500 hover:underline focus:outline-none mr-4"
+                        className="text-blue-500 hover:underline focus:outline-none"
+                        ikon={<Pencil/>}
+                        variant="yellow"
+
                       >
-                        Edit
+                        
                       </Button>
-                      <ButtonTutup
+                      <Button
                         onClick={() => handleDeleteAdmin(admin.id)}
                         className="text-red-500 hover:underline focus:outline-none"
+                        ikon={<Trash2/>}
+                        variant="danger"
+
                       >
-                        Hapus
-                      </ButtonTutup>
+                      </Button>
                     </td>
+
                   </tr>
                 ))}
               </tbody>
