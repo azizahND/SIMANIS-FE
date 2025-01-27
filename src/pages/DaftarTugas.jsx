@@ -61,14 +61,28 @@ const DaftarTugas = () => {
             </h1>
             <p className="text-sm text-gray-500">Semua Daftar Tugas</p>
             {/* Search Section */}
-            <div className="my-5 flex items-center justify-center space-x-4">
-              <Input
+            <div className="my-4 flex items-center justify-center space-x-4">
+            <Input
                 type="text"
-                placeholder=  "Cari berdasarkan Pengarah"
-                className=" p-5 w-full max-w-lg border border-blue-premier rounded-md"
+                placeholder="Cari berdasarkan Nama, Email, atau Jurusan"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                px={20}
+                className="w-full text-center max-w-lg border border-blue-premier rounded-lg"
               />
+
+              {/* Sorting Dropdown */}
+              <select
+                className="p-3 border bg-green border-gray-300 text-white font-medium rounded-md"
+              >
+                <option value="newest" className="text-black bg-white">
+                  Terbaru
+                </option>
+                <option value="oldest" className="text-black bg-white">
+                  Terlama
+                </option>
+              </select>
+
             </div>
 
             <table className="w-full border-collapse">

@@ -13,7 +13,7 @@ import Landing from "./pages/LandingPage";
 import DaftarTugas from "./pages/DaftarTugas";
 import Sertifikat from "./pages/SertifikatPage";
 import SertifikatPeserta from "./pages/SertifikatPesertaPage";
-
+import RegisterKelompok from "./pages/RegisterKelompok";
 
 const App = () => {
   return (
@@ -33,6 +33,7 @@ const App = () => {
         <Route path="/daftarTugas" element={<DaftarTugas />} /> {/* Biodata route */}
         <Route path="/sertifikat" element={<Sertifikat />} /> {/* Biodata route */}
         <Route path="/sertifikatPeserta" element={<SertifikatPeserta />} /> {/* Biodata route */}
+        <Route path="/registerKelompok" element={<RegisterKelompok />} /> {/* Biodata route */}
 
 
 

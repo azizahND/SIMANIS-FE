@@ -33,9 +33,9 @@ const Kelompok = () => {
   return (
     <div className="flex shadow max-w-[95rem] mx-auto">
       <Sidebar />
-      <div className="flex-1 ml-[250px] h-screen">
+      <div className="flex-1 ml-[250px] h-screen w-screen">
         <Navbar />
-        <div className="p-[100px]">
+        <div className="p-[100px] ">
           <div className="shadow-lg p-6 bg-white rounded-md mt-10">
             <h1 className="text-blue-premier text-3xl font-bold">Daftar Kelompok</h1>
             <p className="text-sm text-gray-500">Semua Kelompok</p>

@@ -62,19 +62,19 @@ const ListPesertaMagang = () => {
     const updatedPesertaMagang = [...sortedPesertaMagang];
     const peserta = updatedPesertaMagang[index];
 
-    if (peserta.keterangan === "Diproses") {
-      const confirm = window.confirm("Apakah Anda yakin ingin menyetujui?");
-      if (confirm) {
-        peserta.keterangan = "Diterbitkan";
-      }
-    } else {
-      const confirm = window.confirm("Apakah Anda yakin ingin membatalkan?");
-      if (confirm) {
-        peserta.keterangan = "Diproses";
-      }
+    if (peserta.keterangan === "Pending") {
+      peserta.keterangan = "Selesai";
+      peserta.status = "Non-Aktif"; // Status otomatis jadi Non-Aktif
+    } else if (peserta.keterangan === "Selesai") {
+      peserta.keterangan = "Pending";
+      peserta.status = "Aktif"; // Status otomatis jadi Aktif
     }
 
     setSortedPesertaMagang(updatedPesertaMagang);
+  };
+
+  const getStatusStyle = (status) => {
+    return status === "Aktif" ? "text-green-500 font-bold" : "text-red-500 font-bold";
   };
 
   React.useEffect(() => {
@@ -180,7 +180,7 @@ const ListPesertaMagang = () => {
                         <Select
                           options={statusOptions}
                           value={statusOptionsState}
-                          onChange={(e) => setStatusOptionsState(e.target.value)}
+                          onClick={() => handleToggleApproval(index)}
                           name="statusOptions"
                           className="mt-3"
                           width="w-25"
