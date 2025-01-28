@@ -2,6 +2,8 @@ import blue from "../assets/blue.jpg";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+
 
 
 const RegisterKelompok = () => {
@@ -27,12 +29,18 @@ const RegisterKelompok = () => {
       Daftarkan diri Anda untuk mengikuti program magang yang bermanfaat di Badan Pusat Statistik Sumatera Barat.
     </div>
     <div className="mt-20 text-white font-small text-sm px-5 text-start">
-      Anda sudah punya akun?
+    <p>
+              Sudah Register Kelompok? Klik disini{" "}
+              
+            </p>
+            <Link
+                to="/registerPeserta"
+                className="text-white font-medium hover:underline"
+              >
+                Register Peserta
+              </Link>
     </div>
-    {/* Memastikan posisi Sign in tetap di kiri */}
-    <div className="mb-1 text-white font-small text-lg px-5 text-start font-medium">
-      Sign in
-    </div>
+    
   </div>
 </div>
 
@@ -45,7 +53,7 @@ const RegisterKelompok = () => {
       <div className="bg-blue-500">
         <div className="min-h-screen flex items-center justify-center bg-blue-50">
           <div className="bg-white/100 backdrop-blur-md shadow-lg rounded-lg p-6 w-full max-w-md">
-            <h1 className="text-3xl text-blue-premier font-bold mb-10 text-center">
+            <h1 className="text-3xl text-blue-premier font-bold mb-10 text-center text-shadow-md">
               Register Kelompok
             </h1>
             <div className="mb-4">
@@ -55,10 +63,10 @@ const RegisterKelompok = () => {
               <Input label="Ketua" placeholder="Masukkan Nama Ketua Tim" className="border-blue-premier" />
             </div>
             <div className="mb-4">
-              <Input label="Email" placeholder="Masukkan Email Ketua Tim" className="border-blue-premier" />
+              <Input label="Email" placeholder="Masukkan Email Ketua Kelompok" className="border-blue-premier" />
             </div>
             <div className="mb-4">
-              <Input label="Anggota" placeholder="Masukkan Nama Anggota Tim" className="border-blue-premier" />
+              <Input label="Anggota" placeholder="Masukkan Jumlah Anggota Kelompok" type="number" className="border-blue-premier"  />
             </div>
             <div className="mb-4">
               <Input

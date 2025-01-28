@@ -13,7 +13,7 @@ const NavbarLanding = () => {
             <img
               src="src/assets/logo.png"
               alt="Logo"
-              className="w-10 h-auto mr-2"
+              className="w-12 h-12 h-auto mr-2"
             />
             <div className="grid grid-rows-2 grid-flow-col gap-0">
               <div className="text-xl italic font-bold">
@@ -30,7 +30,7 @@ const NavbarLanding = () => {
             <a className="text-lg text-white hover:text-gray-400 focus:outline-none focus:text-gray-400" href="#kontak">Kontak</a>
             <a>
               <button>
-                <Button variant={"blue"} label={"Login"} className="font-bold text-lg"/>
+                <Button variant={"primary"} label={"Login"} className="font-bold text-lg"/>
               </button>
             </a>
           </div>

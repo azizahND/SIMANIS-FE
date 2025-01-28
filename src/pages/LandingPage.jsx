@@ -55,15 +55,20 @@ const Landing = () => {
   style={{ backgroundImage: `url(${blue})` }}
 >
   <div className="z-5 text-center ">
-    <h1 className="text-5xl font-bold mb-4">
-      Welcome to Intern Platform
+    <h1 className="text-7xl font-bold mb-4">
+      Selamat Datang di SIMANIS
     </h1>
-    <p className="text-lg mb-6">
-      Your gateway to professional experience
+    <p className="text-2xl mb-6">
+      Langkah untuk Pengalaman Profesional
     </p>
-    <div className="flex justify-center">
+    <div className="flex justify-center gap-5 mt-3">
+    <Button
+      label="Login"
+      variant="green"
+    />
     <Button
       label="Get Started"
+      variant="oren"
       className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
     />
     </div>

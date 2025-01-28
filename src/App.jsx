@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard"; 
 import ListPendaftar from "./pages/Kelompok";
@@ -14,7 +13,8 @@ import DaftarTugas from "./pages/DaftarTugas";
 import Sertifikat from "./pages/SertifikatPage";
 import SertifikatPeserta from "./pages/SertifikatPesertaPage";
 import RegisterKelompok from "./pages/RegisterKelompok";
-
+import RegisterPeserta from "./pages/RegisterPesertaPage";
+import Login from "./pages/LoginPage";
 const App = () => {
   return (
     <Router>
@@ -34,6 +34,8 @@ const App = () => {
         <Route path="/sertifikat" element={<Sertifikat />} /> {/* Biodata route */}
         <Route path="/sertifikatPeserta" element={<SertifikatPeserta />} /> {/* Biodata route */}
         <Route path="/registerKelompok" element={<RegisterKelompok />} /> {/* Biodata route */}
+        <Route path="/registerPeserta" element={<RegisterPeserta />} /> {/* Biodata route */}
+
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";  // Import Link untuk navigasi
+import { Link } from "react-router-dom";  
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
@@ -7,11 +7,11 @@ import Logo from "../components/Logo";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [groupCode, setGroupCode] = useState(''); // State baru untuk kode kelompok
+  const [groupCode, setGroupCode] = useState(''); 
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log({ email, password, groupCode }); // Menampilkan input untuk testing
+    console.log({ email, password, groupCode }); 
   };
 
   return (
