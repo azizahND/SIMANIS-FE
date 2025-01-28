@@ -1,10 +1,8 @@
+// Landing.jsx
 import React, { useEffect, useState } from "react";
-import WAVES from "vanta/dist/vanta.waves.min";
-import * as THREE from "three";
 import { motion } from "framer-motion";
 import blue from "../assets/blue.jpg";
 import bps from "../assets/bps.png";
-
 import Intern from "../assets/intern.jpg";
 import NavbarLanding from "../components/NavbarLanding";
 import Button from "../components/Button";
@@ -12,73 +10,70 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import ScrollButton from "../components/Scroll";
 import { School, Earth, GraduationCap, Shield } from "lucide-react";
-import Stat from "../components/Stat";
-import Carrousel from "../components/Carrousel";
-import wave from "../assets/wave.svg";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
-  const [vantaEffect, setVantaEffect] = useState(null);
+  const [navbarSolid, setNavbarSolid] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const vantaRef = React.useRef(null);
 
-  
+  const handleScroll = () => {
+    const homeSection = document.getElementById("home");
+    const tujuanSection = document.getElementById("tujuan");
+    const tujuanTop = tujuanSection?.getBoundingClientRect().top;
+
+    setNavbarSolid(tujuanTop <= 0);
+
+    const homeRect = homeSection?.getBoundingClientRect();
+    setShowScrollButton(homeRect?.bottom <= 0);
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const homeSection = document.getElementById("home");
-      const homeRect = homeSection.getBoundingClientRect();
-      if (homeRect.bottom <= 0) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+    const debouncedScroll = () => {
+      clearTimeout(window.scrollTimeout);
+      window.scrollTimeout = setTimeout(handleScroll, 100);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", debouncedScroll);
+    return () => window.removeEventListener("scroll", debouncedScroll);
   }, []);
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.1 } },
   };
 
   return (
-    <div className="bg-blue-50">
-      <NavbarLanding />
+    <div className="bg-blue-50 ">
+      {/* Navbar */}
+      <NavbarLanding
+        className={`transition duration-300 ${
+          navbarSolid ? "bg-blue-premier shadow-lg" : "bg-transparent"
+        }`}
+      />
 
-      {/* Home Section */}
       <section
-  id="home"
-  ref={vantaRef}
-  className="relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center"
-  style={{ backgroundImage: `url(${blue})` }}
->
-  <div className="z-5 text-center ">
-    <h1 className="text-7xl font-bold mb-4">
-      Selamat Datang di SIMANIS
-    </h1>
-    <p className="text-2xl mb-6">
-      Langkah untuk Pengalaman Profesional
-    </p>
-    <div className="flex justify-center gap-5 mt-3">
-    <Button
-      label="Login"
-      variant="green"
-    />
-    <Button
-      label="Get Started"
-      variant="oren"
-      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-    />
-    </div>
-    
-  </div>
-
-  {/* Stat div yang menimpa */}
-  
-</section>
-
+        id="home"
+        className=" absolute relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center m-0 mt-0"
+        style={{
+          backgroundImage: `url(${blue})`,
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <div className="absolute inset-0 z-0" style={{ top: 0 }} />
+        <div className="z-10 text-center">
+          <h1 className="text-7xl font-bold mb-4">Selamat Datang di SIMANIS</h1>
+          <p className="text-2xl mb-6">Langkah untuk Pengalaman Profesional</p>
+          <div className="flex justify-center gap-5 mt-3">
+            <Link to="/login">
+              <Button className="font-bold" label="Login" variant="green" />
+            </Link>
+            <Link to="/registerKelompok">
+              <Button label="Register" variant="oren" className="font-bold" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Tujuan Section */}
       <motion.section
@@ -89,8 +84,6 @@ const Landing = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
-        
-
         <div className="max-w-[95rem] mx-auto grid md:grid-cols-2 p-20 gap-20 items-center">
           <img
             src={Intern}
@@ -99,8 +92,8 @@ const Landing = () => {
           />
           <div>
             <div className="flex items-center gap-4">
-              <Shield className="h-12 w-12 text-blue-premier text-shadow-lg" />
-              <h2 className="text-5xl font-bold text-blue-premier text-shadow-lg">TUJUAN</h2>
+              <Shield className="h-12 w-12 text-blue-premier" />
+              <h2 className="text-5xl font-bold text-blue-premier">TUJUAN</h2>
             </div>
             <ul className="mt-10 space-y-6 text-lg font-serif list-disc list-inside">
               <li>
@@ -113,9 +106,9 @@ const Landing = () => {
                 yang telah dipelajari di perkuliahan dalam kegiatan nyata.
               </li>
               <li>
-                <strong>Meningkatkan Keterampilan Analitik:</strong> Memperdalam
-                kemampuan analisis data melalui perangkat lunak seperti SPSS, R,
-                atau Python.
+                <strong>Meningkatkan Keterampilan Analitik:</strong>
+                Memperdalam kemampuan analisis data melalui perangkat lunak
+                seperti SPSS, R, atau Python.
               </li>
             </ul>
           </div>
@@ -131,33 +124,49 @@ const Landing = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
-        <div className="bg-blue-premier bg-opacity-90 ">
+        <div className="bg-blue-premier bg-opacity-90">
           <div className="max-w-[95rem] mx-auto grid md:grid-cols-3 gap-10 p-20">
-            <Card title="90" deskripsi="Institusi" textColor="text-blue-sky" Ikon={School} />
-            <Card title="100" deskripsi="Bidang" textColor="text-green" Ikon={Earth} />
-            <Card title="56" deskripsi="Peserta" textColor="text-oren" Ikon={GraduationCap} />
+            <Card
+              title="90"
+              deskripsi="Institusi"
+              textColor="text-blue-sky"
+              Ikon={School}
+            />
+            <Card
+              title="100"
+              deskripsi="Bidang"
+              textColor="text-green"
+              Ikon={Earth}
+            />
+            <Card
+              title="56"
+              deskripsi="Peserta"
+              textColor="text-oren"
+              Ikon={GraduationCap}
+            />
           </div>
         </div>
       </motion.section>
 
       {/* Call to Action Section */}
       <motion.section
-        className="bg-white py-20 relative"
+        className="bg-white py-20"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
         <div className="max-w-[95rem] mx-auto text-center p-20">
-          <h2 className="text-5xl font-bold text-blue-premier mb-20 text-shadow-lg">
+          <h2 className="text-5xl font-bold text-blue-premier mb-20">
             Ambil Kesempatan dan Kendali Masa Depanmu Sekarang
           </h2>
           <div className="flex justify-center">
-          <Button label="Daftar Sekarang" className="text-xl font-bold mb-5" />
-
+            <Button
+              label="Daftar Sekarang"
+              className="text-xl font-bold mb-5"
+            />
           </div>
         </div>
-        
       </motion.section>
 
       {/* Kontak Section */}

@@ -17,7 +17,7 @@ const Button = ({ label, children, onClick, type = "button", className, variant 
     <button
       type={type}
       onClick={onClick}
-      className={`flex items-center gap-2 px-6 py-3 rounded-lg text-white transition ${variantClasses[variant]} ${className}`}
+      className={`flex items-center gap-2 px-6 py-3 rounded-lg text-white font-bold  transition ${variantClasses[variant]} ${className}`}
     >
       {ikon && <span className="text-lg">{ikon}</span>}
       {children || label}
