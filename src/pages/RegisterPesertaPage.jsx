@@ -23,11 +23,11 @@ const RegisterPesertaPage = () => {
           <div className="relative bg-blue-300 h-screen">
       <img
         src={blue}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover "
         alt="Background"
       />
     
-    <div className="absolute inset-0 flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center bg-black/40">
       <div className="bg-white/10 items-center backdrop-blur-md text-center w-[80%] h-[60%] sm:w-[60%] px-6 py-4 rounded-lg shadow-lg">
         <img src={logo} alt="Logo" className="h-25 w-25 object-contain mx-auto mt-7" />
         <h1 className="text-4xl font-bold text-white italic mt-7">
@@ -67,13 +67,13 @@ const RegisterPesertaPage = () => {
                   Register Peserta
                 </h1>
                 <div className="mb-4">
-                  <Input label="Nama" placeholder="Masukkan Asal Institusi" className="border-blue-premier text-blue-premier" />
+                  <Input label="Nama" placeholder="Masukkan Asal Institusi" className="border-blue-900 " />
                 </div>
                 <div className="mb-4">
-                  <Input label="Email" placeholder="Masukkan Nama Ketua Tim" className="border-blue-premier" />
+                  <Input label="Email" placeholder="Masukkan Nama Ketua Tim" className="border-blue-900" />
                 </div>
                 <div className="mb-4">
-                  <Input label="Kode Kelompok" placeholder="Masukkan Email Ketua Tim" className="border-blue-premier" />
+                  <Input label="Kode Kelompok" placeholder="Masukkan Email Ketua Tim" className="border-blue-900" />
                 </div>
                 
                 <div className="flex justify-center">

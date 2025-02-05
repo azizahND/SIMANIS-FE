@@ -7,10 +7,15 @@ import logo from "../assets/logo.png";
 const LoginPage = () => {
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
       style={{ backgroundImage: `url(${blue})` }}
     >
-      <div className="backdrop-blur-md bg-white/15 rounded-2xl shadow-xl p-8 w-full max-w-md">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Form Container */}
+      <div className="relative backdrop-blur-md bg-white/10 rounded-2xl shadow-xl p-8 w-full max-w-md">
+        {/* Logo and Header */}
         <div className="flex items-center justify-center mb-6">
           <img
             src={logo}
@@ -26,8 +31,8 @@ const LoginPage = () => {
             </h1>
           </div>
         </div>
-        <h1 className="text-2xl font-bold text-white mb-6 text-center">
-        </h1>
+
+        {/* Form */}
         <form className="space-y-4">
           <div>
             <label
@@ -36,7 +41,7 @@ const LoginPage = () => {
             >
               Email
             </label>
-            <Input type="email" id="email" placeholder="Enter your email" />
+            <Input type="email" id="email" placeholder="Enter your email"  />
           </div>
           <div>
             <label
@@ -54,7 +59,7 @@ const LoginPage = () => {
           <Button
             variant="premier"
             type="submit"
-            className="w-full py-2 px-4 bg-blue-500 flex justify-center text-center jus text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+            className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300 flex justify-center"
           >
             Login
           </Button>

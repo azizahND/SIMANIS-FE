@@ -16,7 +16,7 @@ const RegisterKelompok = () => {
     alt="Background"
   />
 
-<div className="absolute inset-0 flex items-center justify-center">
+<div className="absolute inset-0 flex items-center justify-center bg-black/40">
   <div className="bg-white/10 items-center backdrop-blur-md text-center w-[80%] h-[60%] sm:w-[60%] px-6 py-4 rounded-lg shadow-lg">
     <img src={logo} alt="Logo" className="h-25 w-25 object-contain mx-auto mt-7" />
     <h1 className="text-4xl font-bold text-white italic mt-7">
@@ -50,40 +50,44 @@ const RegisterKelompok = () => {
 </div>
 
 
-      <div className="bg-blue-500">
+      <div className="">
         <div className="min-h-screen flex items-center justify-center bg-blue-50">
-          <div className="bg-white/100 backdrop-blur-md shadow-lg rounded-lg p-6 w-full max-w-md">
+          <div className="bg-white/100 backdrop-blur-md shadow-2xl rounded-lg p-10 w-full max-w-md">
             <h1 className="text-3xl text-blue-premier font-bold mb-10 text-center text-shadow-md">
               Register Kelompok
             </h1>
             <div className="mb-4">
-              <Input label="Institusi" placeholder="Masukkan Asal Institusi" className="border-blue-premier text-blue-premier" />
+              <Input label="Institusi" placeholder="Masukkan Asal Institusi" className="border-blue-900" />
             </div>
             <div className="mb-4">
-              <Input label="Ketua" placeholder="Masukkan Nama Ketua Tim" className="border-blue-premier" />
+              <Input label="Ketua" placeholder="Masukkan Nama Ketua Tim" className="border-blue-900" />
             </div>
             <div className="mb-4">
-              <Input label="Email" placeholder="Masukkan Email Ketua Kelompok" className="border-blue-premier" />
+              <Input label="Email" placeholder="Masukkan Email Ketua Kelompok" className="border-blue-900" />
             </div>
             <div className="mb-4">
-              <Input label="Anggota" placeholder="Masukkan Jumlah Anggota Kelompok" type="number" className="border-blue-premier"  />
+              <Input label="Anggota" placeholder="Masukkan Jumlah Anggota Kelompok" type="number" className="border-blue-900"  />
             </div>
-            <div className="mb-4">
+            <div className="grid grid-cols-2 pr-3 mb-4 ">
+              <div className="">
               <Input
                 label="Surat Pengantar"
                 placeholder="Upload Surat Pengantar"
                 type="file"
-                className="border-blue-premier"
+                className="border-blue-900 px-1"
               />
-            </div>
-            <div className="mb-4">
+              </div>
+              <div className="">
               <Input
                 label="Surat Balasan"
                 placeholder="Upload Surat Balasan"
                 type="file"
-                className="border-blue-premier"
+                className="border-blue-900 px-1"
               />
+              </div>
+              
             </div>
+           
             <div className="flex justify-center">
               <Button variant="primary" label="Register" />
             </div>

@@ -20,11 +20,11 @@ const RegisterPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-white-200">
       <form
         onSubmit={handleRegister}
-        className="bg-blue-premier p-8 rounded-lg shadow-lg w-full max-w-md"
+        className="bg-blue-premier p-8 rounded-lg shadow-lg w-full max-w-md "
       >
         <Logo />
         
-        <div className="mb-5">
+        <div className="mb-5 ">
           <label className="block mb-2 text-sm font-medium text-white">Email</label>
           <Input
             type="email"

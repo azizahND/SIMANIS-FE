@@ -18,7 +18,7 @@ const NavbarLanding = ({ className = "" }) => {
             alt="Logo Badan Pusat Statistik"
             className="w-12 h-12 h-auto"
           />
-          <div className="grid grid-rows-2 gap-0">
+          <div className="grid grid-rows-2 gap-1">
             <div className="text-xl italic font-bold leading-none">
               BADAN PUSAT STATISTIK
             </div>

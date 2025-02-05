@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import blue from "../assets/blue.jpg";
+import infografis from "../assets/infografis.jpg";
+import gradient from "../assets/gradient.jpg";
+
+
 import bps from "../assets/bps.png";
 import Intern from "../assets/intern.jpg";
 import NavbarLanding from "../components/NavbarLanding";
@@ -9,8 +13,8 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import ScrollButton from "../components/Scroll";
-import { School, Earth, GraduationCap, Shield } from "lucide-react";
-import { Link } from "react-router-dom";
+import { School, Earth, GraduationCap, Shield, BookText, BookUser, BookAudio} from "lucide-react";
+import { Link} from "react-router-dom";
 
 const Landing = () => {
   const [navbarSolid, setNavbarSolid] = useState(false);
@@ -45,35 +49,38 @@ const Landing = () => {
   return (
     <div className="bg-blue-50 ">
       {/* Navbar */}
-      <NavbarLanding
+      {/* <NavbarLanding
         className={`transition duration-300 ${
           navbarSolid ? "bg-blue-premier shadow-lg" : "bg-transparent"
         }`}
-      />
+      /> */}
+      
 
       <section
-        id="home"
-        className=" absolute relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center m-0 mt-0"
-        style={{
-          backgroundImage: `url(${blue})`,
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        <div className="absolute inset-0 z-0" style={{ top: 0 }} />
-        <div className="z-10 text-center">
-          <h1 className="text-7xl font-bold mb-4">Selamat Datang di SIMANIS</h1>
-          <p className="text-2xl mb-6">Langkah untuk Pengalaman Profesional</p>
-          <div className="flex justify-center gap-5 mt-3">
-            <Link to="/login">
-              <Button className="font-bold" label="Login" variant="green" />
-            </Link>
-            <Link to="/registerKelompok">
-              <Button label="Register" variant="oren" className="font-bold" />
-            </Link>
-          </div>
-        </div>
-      </section>
+  id="home"
+  className="relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center"
+  style={{
+    backgroundImage: `url(${blue})`,
+  }}
+>
+  {/* Overlay Background */}
+  <div className="absolute inset-0 bg-black/50 z-0"></div>
+
+  {/* Content */}
+  <div className="relative z-10 text-center">
+    <h1 className="text-7xl font-bold mb-4">Selamat Datang di <span className="text-oren font-sans">SIMANIS</span></h1>
+    <p className="text-2xl mb-6">Langkah untuk Pengalaman Profesional</p>
+    <div className="flex justify-center gap-5 mt-5 ">
+      <Link to="/login">
+        <Button className="font-bold" label="Login" variant="greenn" />
+      </Link>
+      <Link to="/registerKelompok">
+        <Button label="Register" variant="orenn" className="font-bold" />
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       {/* Tujuan Section */}
       <motion.section
@@ -92,8 +99,11 @@ const Landing = () => {
           />
           <div>
             <div className="flex items-center gap-4">
-              <Shield className="h-12 w-12 text-blue-premier" />
-              <h2 className="text-5xl font-bold text-blue-premier">TUJUAN</h2>
+              <div className="bg-blue-100 p-2 rounded-lg  bg-transparant">
+              <Shield className="h-12 w-12 text-blue-premier " />
+              </div>
+            
+              <h2 className="text-5xl font-bold text-blue-premier ">TUJUAN</h2>
             </div>
             <ul className="mt-10 space-y-6 text-lg font-serif list-disc list-inside">
               <li>
@@ -148,6 +158,39 @@ const Landing = () => {
         </div>
       </motion.section>
 
+      {/* <motion.section id="simanis" >
+        <div className="grid grid-cols-2 max-w-[95rem] mx-auto">
+          <div className="">
+            <img src={bps}/>
+          </div>
+          <div className="">
+            <img src={gradient} className="w-full h-full"/>
+          </div>
+        </div>
+
+      </motion.section> */}
+
+      <motion.section id="panduan"
+      className="bg-blue-50 flex items-center">
+        <div className="grid grid-cols-2 max-w-[95rem] mx-auto p-20">
+          <div className=" flex justify-center items-center">
+            <img
+            src={infografis} className="h-100 w-60 shadow-xl border-4 border-blue-900 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110" />
+          </div>
+          <div className=" items-center space-y-6 text-lg ">
+            <div className="flex mt-20">
+            <BookText className="h-12 w-12 text-blue-premier mr-3" />
+            <h1 className="text-3xl font-bold text-blue-premier ">PANDUAN PENGGUNAAN </h1>
+
+            </div>
+              <h3 className="flex text-lg items-center font-serif"><div className="relative backdrop-blur-md bg-blue-100 p-3 mr-2 rounded-md text-blue-premier border font-semibold  items-center "><BookUser/></div> Lihat Panduan Singkat – Ikuti langkah-langkah dasar untuk registrasi dan login.</h3>
+            <h3 className="flex text-lg items-center font-serif"><div className="relative backdrop-blur-md bg-blue-100 p-3 mr-2 rounded-md text-blue-premier border font-semibold  items-center"><BookAudio/></div>Butuh Info Lebih Lengkap? – Akses guidebook resmi untuk detail penggunaan.</h3>
+            <Button variant="greenn" label="Guide Book"/>
+            <h3>Selamat menggunakan SIMANIS! 🚀</h3>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Call to Action Section */}
       <motion.section
         className="bg-white py-20"
@@ -163,11 +206,13 @@ const Landing = () => {
           <div className="flex justify-center">
             <Button
               label="Daftar Sekarang"
-              className="text-xl font-bold mb-5"
+              className="text-xl font-bold mb-5 text-white"
             />
           </div>
         </div>
       </motion.section>
+
+      
 
       {/* Kontak Section */}
       <section id="kontak">
