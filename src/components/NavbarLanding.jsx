@@ -6,13 +6,15 @@ const NavbarLanding = ({ className = "" }) => {
     { name: "Home", href: "#home" },
     { name: "Tujuan", href: "#tujuan" },
     { name: "Kontak", href: "#kontak" },
+    { name: "Login", href: "/login" },
+
   ];
 
   return (
     <header
-      className={`flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gradient-to-r from-blue-600/90 to-blue-800/90 rounded-2xl md:rounded-3xl text-sm py-3 sticky top-0 z-20 w-[80%]${className}`}
+      className={`flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gradient-to-r from-blue-600/90 to-blue-800/90 rounded-2xl md:rounded-3xl text-sm py-3 sticky top-0 z-20 ${className}`}
     >
-      <nav className="max-w-[85rem] w-full mx-auto px-4 flex items-center justify-between">
+      <nav className="max-w-[85rem] w-full mx-auto px-4 flex items-center justify-between w-[80%]">
         {/* Logo BPS */}
         <Link
           to="/home"
@@ -48,14 +50,7 @@ const NavbarLanding = ({ className = "" }) => {
           ))}
 
           {/* Tombol Login */}
-          <Link to="/login">
-            <Button
-              variant="primary"
-              label="Login"
-              className="font-bold text-lg"
-              aria-label="Tombol Login"
-            />
-          </Link>
+          
         </div>
       </nav>
     </header>

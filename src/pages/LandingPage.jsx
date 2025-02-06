@@ -11,11 +11,8 @@ import intern10 from "../assets/intern10.jpg";
 import intern11 from "../assets/intern11.jpg";
 import intern12 from "../assets/intern12.jpg";
 
-
-
 import Carrousel from "../components/Carrousel";
 import GroupCard from "../components/GroupCard";
-
 
 import bps from "../assets/bps.png";
 import Intern from "../assets/intern.jpg";
@@ -65,7 +62,7 @@ const Landing = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.1 } },
   };
 
-  const images = [intern8, intern10, intern9,  intern12];
+  const images = [intern8, intern10, intern9, intern12];
 
   return (
     <div className="bg-blue-50 ">
@@ -75,6 +72,49 @@ const Landing = () => {
           navbarSolid ? "bg-blue-premier shadow-lg" : "bg-transparent"
         }`}
       />
+
+      {/* <section id="about">
+        <div class="grid grid-cols-12 ">
+          <div className="col-span-6 bg-gradient-to-r from-blue-600/90 to-blue-800/90">
+            <div className=" relative z-10 text-start  p-10 text-wrap">
+              <h1 className="text-7xl font-bold mb-4 text-white">
+                Selamat Datang di{" "}
+                <span className="text-green font-sans">SIMANIS</span>
+              </h1>
+              <p className="text-xl mt-10  text-white ">
+                Sistem Pengelolaan Magang BPS Sumbar{" "}
+                <span className="text-green font-medium">(SIMANIS)</span> adalah
+                platform digital untuk mengelola data magang, pembagian unit
+                kerja, pemantauan peserta, dan penerbitan sertifikat secara
+                efisien dan transparan.
+              </p>
+              <div className="flex justify-start gap-5 mt-10 ">
+                <Link to="/login">
+                  <Button className="font-bold" label="Login" variant="bluee" />
+                </Link>
+                <Link to="/registerKelompok">
+                  <Button
+                    label="Register"
+                    variant="orenn"
+                    className="font-bold"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="col-span-6 inset-0 bg-black/70 z-0 relative"
+            style={{
+              backgroundImage: `url(${intern7})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
+        </div>
+      </section> */}
 
       <section
         id="home"
@@ -112,75 +152,96 @@ const Landing = () => {
       {/* Tujuan Section */}
       <motion.section
         id="tujuan"
-       className="py-20 bg-gradient-to-b from-blue-100 via-blue-0 to-white"
-
+        className="py-20 bg-gradient-to-b from-blue-100 via-blue-0 to-white"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
         <div className="max-w-[95rem] mx-auto grid md:grid-cols-2 p-20 gap-20 items-center ">
-         
           <div>
             <div className="flex items-center gap-4">
               <div className="bg-blue-50 p-2 rounded-lg border-2 border-blue-premier">
                 <Shield className="h-12 w-12 text-blue-premier " />
               </div>
 
-              <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent bg-white text-shadow-lg ">TUJUAN</h2>
+              <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent bg-white text-shadow-lg ">
+                TUJUAN
+              </h2>
             </div>
             <div className="mt-10 space-y-6 text-lg font-serif">
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start">
-          <span className="mr-2">•</span>
-          <strong className="">Mengaplikasikan Teori ke Praktik</strong>
-        </div>
-        <p className="text-justify px-4">
-          Magang memberikan kesempatan untuk mengaplikasikan pengetahuan yang diperoleh di bangku kuliah ke dalam situasi dunia kerja yang nyata, memperdalam pemahaman materi yang telah dipelajari
-        </p>
-      </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <strong className="">Mengaplikasikan Teori ke Praktik</strong>
+                </div>
+                <p className="text-justify px-4">
+                  Magang memberikan kesempatan untuk mengaplikasikan pengetahuan
+                  yang diperoleh di bangku kuliah ke dalam situasi dunia kerja
+                  yang nyata, memperdalam pemahaman materi yang telah dipelajari
+                </p>
+              </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start">
-          <span className="mr-2">•</span>
-          <strong>Meningkatkan Keterampilan Kerja</strong>
-        </div>
-        <p className="text-justify px-4">
-          Melalui pengalaman langsung, peserta magang dapat mengasah keterampilan teknis dan non-teknis seperti komunikasi, kerja tim, dan problem solving yang sangat dibutuhkan dalam dunia profesional
-        </p>
-      </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <strong>Meningkatkan Keterampilan Kerja</strong>
+                </div>
+                <p className="text-justify px-4">
+                  Melalui pengalaman langsung, peserta magang dapat mengasah
+                  keterampilan teknis dan non-teknis seperti komunikasi, kerja
+                  tim, dan problem solving yang sangat dibutuhkan dalam dunia
+                  profesional
+                </p>
+              </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start">
-          <span className="mr-2">•</span>
-          <strong>Memperluas Jaringan Profesional</strong>
-        </div>
-        <p className="text-justify px-4">
-          Magang memberi kesempatan untuk berinteraksi dengan profesional di industri terkait, yang bisa membuka peluang untuk karier di masa depan
-        </p>
-      </div>
-    </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <strong>Memperluas Jaringan Profesional</strong>
+                </div>
+                <p className="text-justify px-4">
+                  Magang memberi kesempatan untuk berinteraksi dengan
+                  profesional di industri terkait, yang bisa membuka peluang
+                  untuk karier di masa depan
+                </p>
+              </div>
+            </div>
           </div>
           <div className="relative p-8 ">
-            <div className="absolute top-0 bottom-0  right-0 bg-gradient-to-r from-blue-600/90 to-blue-800/90 opacity-100 rounded-xl" style={{ width: '70%', height: '100%' }}></div>
+            <div
+              className="absolute top-0 bottom-0  right-0 bg-gradient-to-r from-blue-600/90 to-blue-800/90 opacity-100 rounded-xl"
+              style={{ width: "70%", height: "100%" }}
+            ></div>
             <div className="z-10">
               <Carrousel images={images} />
             </div>
           </div>
-
-
         </div>
       </motion.section>
 
       <motion.section className="bg-gradient-to-r from-blue-600/90 to-blue-800/90 flex justify-center gap-0 py-10">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full max-w-6xl">
-    <GroupCard judul="Institusi" jumlah={90} Ikon={School} jumlahColor="text-white" />
-    <GroupCard judul="Bidang" jumlah={120} Ikon={Earth} jumlahColor="text-white" />
-    <GroupCard judul="Peserta" jumlah={75} Ikon={GraduationCap} jumlahColor="text-white  " />
-  </div>
-</motion.section>
-
-
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full max-w-6xl">
+          <GroupCard
+            judul="Institusi"
+            jumlah={90}
+            Ikon={School}
+            jumlahColor="text-white"
+          />
+          <GroupCard
+            judul="Bidang"
+            jumlah={120}
+            Ikon={Earth}
+            jumlahColor="text-white"
+          />
+          <GroupCard
+            judul="Peserta"
+            jumlah={75}
+            Ikon={GraduationCap}
+            jumlahColor="text-white  "
+          />
+        </div>
+      </motion.section>
 
       {/* Statistik Section */}
       {/* <motion.section
@@ -271,21 +332,21 @@ const Landing = () => {
         viewport={{ once: true, amount: 0.5 }}
       >
         <div className="max-w-[95rem] mx-auto text-center p-20">
-        <div className="text-center">
-      <h2 className="text-5xl font-bold text-blue-premier text-shadow-lg">
-        Magang di BPS Sumbar bareng{" "}
-        <span className="text-green font-bold">SIMANIS</span>
-      </h2>
-      <h2 className="text-5xl font-bold text-blue-premier text-shadow-lg flex justify-center items-center gap-2 mt-4">
-        Siapkan dirimu sekarang!
-        <motion.span
-          animate={{ y: [-5, 5, -5] }}
-          transition={{ repeat: Infinity, duration: 0.5 }}
-        >
-          🚀
-        </motion.span>
-      </h2>
-    </div>
+          <div className="text-center">
+            <h2 className="text-5xl font-bold text-blue-premier text-shadow-lg">
+              Magang di BPS Sumbar bareng{" "}
+              <span className="text-green font-bold">SIMANIS</span>
+            </h2>
+            <h2 className="text-5xl font-bold text-blue-premier text-shadow-lg flex justify-center items-center gap-2 mt-4">
+              Siapkan dirimu sekarang!
+              <motion.span
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ repeat: Infinity, duration: 0.5 }}
+              >
+                🚀
+              </motion.span>
+            </h2>
+          </div>
           <div className="flex justify-center mt-20">
             <Button
               label="Daftar Sekarang"
