@@ -1,30 +1,50 @@
-import Button from "./Button";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const NavbarLanding = ({ className = "" }) => {
+const NavbarLanding = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Jika scroll lebih dari 50px, ubah state jadi true
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    // Tambahkan event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Bersihkan event listener saat komponen unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const menuItems = [
     { name: "Home", href: "#home" },
     { name: "Tujuan", href: "#tujuan" },
     { name: "Kontak", href: "#kontak" },
     { name: "Login", href: "/login" },
-
   ];
 
   return (
     <header
-      className={`flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gradient-to-r from-blue-600/90 to-blue-800/90 rounded-2xl md:rounded-3xl text-sm py-3 sticky top-0 z-20 ${className}`}
+      className={`fixed top-0 w-full z-20 transition-all duration-300   ${
+        isScrolled
+          ? "bg-gradient-to-r from-blue-600/90 to-blue-800/90 shadow-md" // Navbar berubah jadi biru saat di-scroll
+          : "bg-transparent"
+      }`}
     >
-      <nav className="max-w-[85rem] w-full mx-auto px-4 flex items-center justify-between w-[80%]">
+      <nav className="max-w-[85rem] mx-auto px-6 flex items-center justify-between py-3">
         {/* Logo BPS */}
         <Link
           to="/home"
-          className="flex items-center gap-x-2 text-xl font-semibold text-white focus:outline-none focus:opacity-80"
+          className="flex items-center gap-x-2 text-xl font-semibold text-white"
           aria-label="Brand - Badan Pusat Statistik"
         >
           <img
             src="src/assets/logo.png"
             alt="Logo Badan Pusat Statistik"
-            className="w-12 h-12"
+            className="w-15 h-12"
           />
           <div className="grid grid-rows-2 gap-1">
             <div className="text-xl font-sans italic font-bold leading-none">
@@ -37,20 +57,17 @@ const NavbarLanding = ({ className = "" }) => {
         </Link>
 
         {/* Menu Navigasi */}
-        <div className="flex items-center gap-5 mt-5 sm:mt-0 sm:ps-5">
+        <div className="flex items-center gap-5">
           {menuItems.map((item, index) => (
             <a
               key={index}
               href={item.href}
-              className="text-lg text-white hover:text-gray-400 focus:outline-none"
+              className="text-lg text-white hover:text-gray-400"
               aria-label={`Link ke ${item.name}`}
             >
               {item.name}
             </a>
           ))}
-
-          {/* Tombol Login */}
-          
         </div>
       </nav>
     </header>

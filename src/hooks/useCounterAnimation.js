@@ -8,8 +8,8 @@ const useCounterAnimation = (jumlah) => {
     const animateCounter = () => {
       let start = 0;
       const end = jumlah;
-      const duration = 2000; // 2 seconds animation duration
-      const steps = 100; // How many steps in the animation
+      const duration = 4000; // 2 seconds animation duration
+      const steps = 50; // How many steps in the animation
       const stepDuration = duration / steps;
 
       const stepInterval = setInterval(() => {
