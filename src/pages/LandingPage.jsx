@@ -1,6 +1,6 @@
 // Landing.jsx
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import blue from "../assets/blue.jpg";
 import infografis from "../assets/infografis.jpg";
 import gradient from "../assets/gradient.jpg";
@@ -22,13 +22,21 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import ScrollButton from "../components/Scroll";
 import {
+  Award,
+  BarChart2,
   School,
   Earth,
   GraduationCap,
   Shield,
-  BookText,
   BookUser,
   BookAudio,
+  ClipboardList,
+  ChartNoAxesCombined,
+  CircleUser,
+  ClipboardCheck,
+  BookText,
+  ShieldCheck,
+  Star,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -46,6 +54,52 @@ const Landing = () => {
     const homeRect = homeSection?.getBoundingClientRect();
     setShowScrollButton(homeRect?.bottom <= 0);
   };
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cards = [
+    {
+      title: "Dashboard",
+      deskripsi:
+        "Menampilkan statistik tugas peserta, termasuk jumlah tugas selesai, tugas dalam proses, dan pencapaian selama magang secara real-time.",
+      Ikon: ChartNoAxesCombined,
+      iconColor: "text-blue-sky border-blue-500",
+    },
+    {
+      title: "Biodata",
+      deskripsi:
+        "Informasi pribadi peserta, seperti nama, institusi asal, dan kontak, yang dapat diperbarui sesuai kebutuhan administrasi.",
+      Ikon: CircleUser,
+      iconColor: "text-green border-green",
+    },
+    {
+      title: "Tugas",
+      deskripsi:
+        "Daftar tugas peserta dengan deskripsi, tenggat waktu, dan status penyelesaian untuk memantau progres dengan mudah.",
+      Ikon: ClipboardCheck,
+      iconColor: "text-oren border-oren",
+    },
+    {
+      title: "Logbook",
+      deskripsi:
+        "Catatan aktivitas harian peserta, memuat pekerjaan, tantangan, dan pembelajaran, serta akses bagi mentor untuk evaluasi.",
+      Ikon: BookText,
+      iconColor: "text-blue-sky border-blue-sky",
+    },
+    {
+      title: "Sertifikat",
+      deskripsi:
+        "Sistem otomatis yang mengeluarkan sertifikat digital setelah peserta menyelesaikan program magang.",
+      Ikon: Award,
+      iconColor: "text-green border-green",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % cards.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [cards.length]);
 
   useEffect(() => {
     const debouncedScroll = () => {
@@ -65,11 +119,15 @@ const Landing = () => {
   const images = [intern8, intern10, intern9, intern12];
 
   const words = ["Selamat", "Datang", "di", "SIMANIS"];
-const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
-};
-const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditampilkan
+  const wordVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100 },
+    },
+  };
+  const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditampilkan
   const [wordIndex, setWordIndex] = useState(0); // Menyimpan index kata
   const [charIndex, setCharIndex] = useState(0); // Menyimpan index karakter per kata
 
@@ -101,8 +159,14 @@ const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditam
       return () => clearTimeout(timer);
     }
   }, [wordIndex, charIndex]);
-  const formattedText = displayText.split(' ').map((word, index) => {
-    return index === 3 ? <span key={index} className="text-oren font-bold">{word}</span> : word + ' ';
+  const formattedText = displayText.split(" ").map((word, index) => {
+    return index === 3 ? (
+      <span key={index} className="text-green font-bold">
+        {word}
+      </span>
+    ) : (
+      word + " "
+    );
   });
 
   const steps = [
@@ -142,83 +206,130 @@ const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditam
         }`}
       />
 
-<section
-  id="home"
-  className="relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center"
-  style={{
-    backgroundImage: `url(${intern7})`, // Perbaiki format URL
-  }}
->
-  <div className="absolute inset-0 bg-black/70 z-0"></div>
-  <div className="flex justify-start grid grid-cols-2 pl-12 max-w-[95rem]">
-    <div className="relative z-10 text-start pr-20 text-wrap">
-      <h1 className="text-7xl font-bold mb-4 min-h-[6rem]">
-        {formattedText} {/* Tampilkan teks yang sudah diformat */}
-       </h1>
-      <p className="text-xl mt-10">
-        Sistem Pengelolaan Magang BPS Sumbar{" "}
-        <span className="text-green font-medium">(SIMANIS)</span> adalah
-        platform digital untuk mengelola data magang, pembagian unit
-        kerja, pemantauan peserta, dan penerbitan sertifikat secara
-        efisien dan transparan.
-      </p>
-      <div className="flex justify-start gap-5 mt-10">
-      <Link to="/login">
-              <Button className="font-bold" label="Login" variant="blue" />
-            </Link>
-            <Link to="/registerKelompok">
-              <Button label="Register" variant="oren" className="font-bold" />
-            </Link>
-      </div>
-    </div>
-  </div> 
- </section> 
-
-
-
-
-
-<motion.section
-  id="statistik"
-  className="relative bg-gradient-to-r from-blue-600/90 to-blue-800/90 flex justify-center gap-0 py-10 overflow-hidden"
->
-  {/* Efek Lampu Halus (DIPISAH) */}
-  <motion.div className="absolute inset-0 pointer-events-none">
-    {[...Array(30)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute bg-white rounded-full opacity-50"
+      <section
+        id="home"
+        className="relative w-full h-screen flex items-center justify-center text-white bg-cover bg-center"
         style={{
-          width: `${Math.random() * 6 + 4}px`, // Ukuran partikel 4px - 10px
-          height: `${Math.random() * 6 + 4}px`,
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
+          backgroundImage: `url(${intern7})`, // Perbaiki format URL
         }}
-        animate={{
-          opacity: [0.2, 0.6, 0.2], // Kelap-kelip super halus
-          scale: [1, 1.1, 1], // Perubahan ukuran minimal biar subtle
-          x: [0, Math.random() * 5 - 2.5, 0], // Gerak horizontal sangat pelan
-          y: [0, Math.random() * 5 - 2.5, 0], // Gerak vertikal sangat pelan
-        }}
-        transition={{
-          duration: Math.random() * 500 + 500, // Durasi antara 50-100 detik!
-          repeat: Infinity,
-          ease: "linear", // Gerakan smooth tanpa stop
-        }}
-      />
-    ))}
-  </motion.div>
+      >
+        <div className="absolute inset-0 bg-black/70 z-0"></div>
+        <div className="flex justify-start grid grid-cols-2 pl-12 max-w-[95rem]">
+          <div className="relative z-10 text-start pr-20 text-wrap">
+            <h1 className="text-7xl font-bold mb-4 min-h-[6rem]">
+              {formattedText} {/* Tampilkan teks yang sudah diformat */}
+            </h1>
+            <p className="text-xl mt-10">
+              Sistem Pengelolaan Magang BPS Sumbar{" "}
+              <span className="text-green font-medium">(SIMANIS)</span> adalah
+              platform digital untuk mengelola data magang, pembagian unit
+              kerja, pemantauan peserta, dan penerbitan sertifikat secara
+              efisien dan transparan.
+            </p>
+            <div className="flex justify-start gap-5 mt-10">
+              <Link to="/login">
+                <Button className="font-bold" label="Login" variant="blue" />
+              </Link>
+              <Link to="/registerKelompok">
+                <Button label="Register" variant="oren" className="font-bold" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  {/* Grid GroupCard */}
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full max-w-6xl relative">
-    <GroupCard judul="Institusi" jumlah={90} Ikon={School} jumlahColor="text-white" />
-    <GroupCard judul="Bidang" jumlah={120} Ikon={Earth} jumlahColor="text-white" />
-    <GroupCard judul="Peserta" jumlah={75} Ikon={GraduationCap} jumlahColor="text-white" />
-  </div>
-</motion.section>
+      <section id="layanan" className="bg-gradient-to-t from-blue-100 via-blue-0 to-white">
+        <div className="max-w-7xl mx-auto py-16 px-4">
+          <div className="text-center mb-10 ">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent leading-[1.4] text-shadow-lg">
+              LAYANAN UTAMA
+            </h1>
+          </div>
 
+          <motion.div
+            className="flex justify-center items-center gap-2 overflow-hidden p-7"
+            layout
+          >
+            <AnimatePresence mode="wait">
+              {cards.map((card, index) => {
+                const position =
+                  (index - activeIndex + cards.length) % cards.length;
+                const isCenter = position === 0;
 
+                return (
+                  <motion.div
+                    key={card.title}
+                    className="w-64"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      scale: isCenter ? 1 : 0.9,
+                      zIndex: isCenter ? 10 : 0,
+                    }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Card {...card} isCenter={isCenter} />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
 
+      <motion.section
+        id="statistik"
+        className="relative bg-gradient-to-r from-blue-600/90 to-blue-800/90 flex justify-center gap-0 py-10 overflow-hidden"
+      >
+        <motion.div className="absolute inset-0 pointer-events-none">
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-white rounded-full opacity-50"
+              style={{
+                width: `${Math.random() * 6 + 4}px`,
+                height: `${Math.random() * 6 + 4}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0.2, 0.6, 0.2],
+                scale: [1, 1.1, 1],
+                x: [0, Math.random() * 5 - 2.5, 0],
+                y: [0, Math.random() * 5 - 2.5, 0],
+              }}
+              transition={{
+                duration: Math.random() * 500 + 500,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          ))}
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full max-w-6xl relative">
+          <GroupCard
+            judul="Institusi"
+            jumlah={90}
+            Ikon={School}
+            jumlahColor="text-white"
+          />
+          <GroupCard
+            judul="Bidang"
+            jumlah={120}
+            Ikon={Earth}
+            jumlahColor="text-white"
+          />
+          <GroupCard
+            judul="Peserta"
+            jumlah={75}
+            Ikon={GraduationCap}
+            jumlahColor="text-white"
+          />
+        </div>
+      </motion.section>
 
       {/* Tujuan Section */}
       <motion.section
@@ -239,7 +350,7 @@ const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditam
           >
             <div className="flex items-center gap-4">
               <div className="bg-blue-50 p-2 rounded-lg border-2 border-blue-premier">
-                <Shield className="h-12 w-12 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-blue-800 bg-white " />
+                <Shield className="h-12 w-12 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-blue-800 bg-transparant " />
               </div>
 
               <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent bg-white text-shadow-lg">
@@ -309,7 +420,7 @@ const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditam
         <div className="mb-6 mt-10">
           <h1 className="text-3xl font-bold text-white">
             5 Panduan Singkat Mengakses{" "}
-            <span className="font-bold">SIMANIS</span>
+            <span className="font-bold  border-color ">SIMANIS</span>
           </h1>
         </div>
 
@@ -334,47 +445,48 @@ const [displayText, setDisplayText] = useState(""); // Menyimpan teks yang ditam
               <div className="text-xl font-serif mt-10">{step.text}</div>
             </div>
           ))}
-          
         </div>
         <div className="mb-10">
-            <Button variant="oren" label="Guide Book" className="text-white text-lg"/>
-          </div>
-        
+          <Button
+            variant="oren"
+            label="Guide Book"
+            className="text-white text-lg"
+          />
+        </div>
       </section>
 
-      {/* Call to Action Section */}
       <motion.section
-  className="bg-white py-20"
-  variants={sectionVariants}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: false, amount: 0.2 }} // Pastikan animasi tetap muncul setiap masuk viewport
->
-  <div className="max-w-[95rem] mx-auto text-center p-20">
-    <div className="text-center">
-      <h2 className="text-5xl font-bold text-blue-600 text-shadow-lg">
-        Magang di BPS Sumbar bareng{" "}
-        <span className="text-green font-bold">SIMANIS</span>
-      </h2>
-      <h2 className="text-5xl font-bold text-blue-600 text-shadow-lg flex justify-center items-center gap-2 mt-4">
-        Siapkan dirimu sekarang!
-        <motion.span
-          animate={{ y: [-5, 5, -5] }}
-          transition={{ repeat: Infinity, duration: 0.5 }}
-        >
-          🚀
-        </motion.span>
-      </h2>
-    </div>
-    <div className="flex justify-center mt-20">
-      <Button
-        label="Daftar Sekarang"
-        className="text-xl font-bold mb-5 text-white"
-      />
-    </div>
-  </div>
-</motion.section>
-
+        className="bg-gradient-to-b from-blue-100 via-blue-0 to-white py-20"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+      >
+        <div className="max-w-[95rem] mx-auto text-center p-20">
+          <div className="text-center">
+            <h2 className="text-5xl font-bold text-blue-600 mt-10 text-shadow-lg">
+              Magang di BPS Sumbar bareng{" "}
+              <span className="text-green font-bold">SIMANIS</span>
+            </h2>
+            <h2 className="text-5xl font-bold text-blue-600 text-shadow-lg flex justify-center items-center gap-2 mt-4">
+              Siapkan dirimu sekarang! 🚀
+            </h2>
+            <motion.span
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ repeat: Infinity, duration: 0.5 }}
+            >
+              <div className="flex justify-center mt-20">
+                <Link to="/registerkelompok">
+                  <Button
+                    label="Daftar Sekarang"
+                    className="text-xl font-bold mb-10 text-white animate-bounce"
+                  />
+                </Link>
+              </div>
+            </motion.span>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Kontak Section */}
       <section id="kontak">

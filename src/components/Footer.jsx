@@ -26,8 +26,8 @@ const Footer = () => {
         </div>
 
         {/* Garis dan Hak Cipta */}
-        <div className="border-t border-gray-200 mt-6 pt-4 text-center text-sm">
-          <p>Hak Cipta © 2025 Badan Pusat Statistik</p>
+        <div className="border-t border-gray-200  mt-5  text-center text-sm">
+          <p className="mt-5">Hak Cipta © 2025 Badan Pusat Statistik</p>
         </div>
       </div>
     </footer>
