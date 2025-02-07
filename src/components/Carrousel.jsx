@@ -5,21 +5,18 @@ const Carrousel = ({ images = [] }) => {
   const { currentIndex, handleNext, handlePrev } = useCarousel(images.length);
 
   return (
-    <div className="relative">
-      <div className="relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
+    <div className="relative w-full h-[400px]"> {/* Fix tinggi agar konsisten */}
+      <div className="relative overflow-hidden w-full h-full bg-white rounded-lg">
         <div
-          className="flex transition-transform duration-700"
+          className="flex transition-transform duration-700 h-full"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
         >
           {images.length > 0 ? (
             images.map((image, index) => (
-              <div
-                key={index}
-                className="w-full flex-shrink-0 h-full"
-              >
-                <div className="flex justify-center items-center h-full bg-gray-100">
+              <div key={index} className="w-full flex-shrink-0 h-full">
+                <div className="flex justify-center items-center w-full h-full bg-gray-100">
                   <img
                     src={image}
                     alt={`Slide ${index + 1}`}
@@ -30,8 +27,8 @@ const Carrousel = ({ images = [] }) => {
             ))
           ) : (
             <div className="w-full flex-shrink-0 h-full">
-              <div className="flex justify-center items-center h-full bg-gray-100">
-                <span className="self-center text-4xl text-gray-800">
+              <div className="flex justify-center items-center w-full h-full bg-gray-100">
+                <span className="text-4xl text-gray-800">
                   No images available
                 </span>
               </div>
@@ -79,8 +76,6 @@ const Carrousel = ({ images = [] }) => {
           <path d="m9 18 6-6-6-6"></path>
         </svg>
       </button>
-
-      <div className="flex justify-center absolute bottom-3 start-0 end-0 space-x-2"></div>
     </div>
   );
 };
